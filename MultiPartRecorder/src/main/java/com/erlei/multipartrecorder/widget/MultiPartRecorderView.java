@@ -15,9 +15,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * 分段视频录制视图
+ * Segmented video recording view
  */
-@SuppressWarnings("all")
+
 public class MultiPartRecorderView extends View {
 
     private int mMinDuration;
@@ -161,7 +161,7 @@ public class MultiPartRecorderView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         long maxRecordTimeMillis = getMaxRecordTimeMillis();
-        //画背景颜色
+        //Paint background color
         canvas.drawColor(mBackgroundColor);
 
         drawMinRecordTimeDivider(canvas, maxRecordTimeMillis);
@@ -176,7 +176,7 @@ public class MultiPartRecorderView extends View {
     }
 
     /**
-     * 要刪除的视频块
+     * Video block to delete
      */
     private void drawRemovePart(Canvas canvas, long maxRecordTimeMillis) {
         for (int i = 0; i < mParts.size(); i++) {
@@ -197,10 +197,10 @@ public class MultiPartRecorderView extends View {
     }
 
     /**
-     * 画前景色 , 随着视频录制时长不断增加
+     * Draw the foreground color, as the video recording time increases
      */
     private void drawForegroundColor(Canvas canvas, long maxRecordTimeMillis) {
-        mPaint.setStrokeWidth(getMeasuredHeight() + 1);//有些手机没盖住背景色 , 导致有底部背景色漏出一条缝
+        mPaint.setStrokeWidth(getMeasuredHeight() + 1);//Some mobile phones do not cover the background color, resulting in a bottom background color leaking a seam
         mPaint.setColor(mForegroundColor);
         int right = (int) mapValue(getDuration(), 0, maxRecordTimeMillis, getLeft(), getRight());
         canvas.drawLine(0, getMeasuredHeight() / 2, right, getMeasuredHeight() / 2, mPaint);
@@ -208,7 +208,7 @@ public class MultiPartRecorderView extends View {
     }
 
     /**
-     * 画视频段分割线
+     * Draw video segmentation line
      */
     private void drawPartDivider(Canvas canvas, long maxRecordTimeMillis) {
         mPaint.setStrokeWidth(mDividerWidth);
@@ -225,7 +225,7 @@ public class MultiPartRecorderView extends View {
     }
 
     /**
-     * 画最小视频时长分割线
+     * Draw the minimum video length division line
      */
     private void drawMinRecordTimeDivider(Canvas canvas, long maxRecordTimeMillis) {
         mPaint.setColor(mMinRecordColor);
@@ -239,25 +239,20 @@ public class MultiPartRecorderView extends View {
     }
 
     /**
-     * 如果没有设置最大录制时间 , 那么最大录制时间会是 getDuration() * 2
+     * If the maximum recording time is not set, the maximum recording time will be getDuration() * 2
      *
-     * @return 最大录制时间
+     * @return Maximum recording time
      */
     public long getMaxRecordTimeMillis() {
         return mMaxDuration <= 0 ? getDuration() * 2 : mMaxDuration * 1000;
     }
 
-    /**
-     * @return 总录制时长
-     */
+
     public long getDuration() {
         return getDuration(mParts.size() - 1);
     }
 
-    /**
-     * @param index 视频块index
-     * @return 返回这个视频块之前的总时长
-     */
+
     public long getDuration(int index) {
         long duration = 0;
         for (int i = 0; i < index + 1; i++) {
@@ -289,7 +284,7 @@ public class MultiPartRecorderView extends View {
     }
 
     /**
-     * 继续录制的时候 , 如果有视频块标记为删除状态, 那么恢复
+     * When you continue recording, if there is a video block marked as deleted, then restore
      */
     private void resetPartState() {
         for (int i = 0; i < mParts.size(); i++) {
@@ -298,14 +293,14 @@ public class MultiPartRecorderView extends View {
     }
 
     /**
-     * 继续录制的时候 , 如果上一个视频块标记为删除状态 , 那么恢复
+     *When recording continues, if the previous video block is marked as deleted, then restore
      */
     private void resetLastPartState() {
         setPartStatus(mParts.size() - 1, false);
     }
 
     /**
-     * @return 最后一个视频块是不是标记为待删除状态
+     * @return Is the last video block marked as deleted?
      */
     public boolean lastPartRemoved() {
         return !mParts.isEmpty() && mParts.get(mParts.size() - 1).remove;
@@ -316,7 +311,7 @@ public class MultiPartRecorderView extends View {
     }
 
     /**
-     * 删除进度块
+     * Delete progress block
      */
     public Part removePart(int index) {
         if (index > mParts.size() || index < 0) return null;
@@ -326,7 +321,7 @@ public class MultiPartRecorderView extends View {
     }
 
     /**
-     * 删除进度块
+     * Delete progress block
      */
     public Part removePart(String path) {
         int i = mParts.indexOf(new Part(path, 0));
@@ -351,7 +346,7 @@ public class MultiPartRecorderView extends View {
     }
 
     /**
-     * 标记最后一个分块为删除状态
+     * Mark the last block as deleted
      */
     public void markLastPartRemove() {
         setPartStatus(mParts.size() - 1, true);
@@ -363,10 +358,10 @@ public class MultiPartRecorderView extends View {
     }
 
     /**
-     * 设置分块的状态
-     *
-     * @param remove 是否删除
-     */
+          * Set the status of the block
+          *
+          * @param remove delete
+          */
     public void setPartStatus(int index, boolean remove) {
         if (index > mParts.size() || index < 0) return;
         mParts.get(index).remove = remove;
@@ -445,22 +440,21 @@ public class MultiPartRecorderView extends View {
     public static interface RecordListener {
 
         /**
-         * 超过最小录制时间
+         * More than the minimum recording time
          */
         void onOvertakeMinTime();
 
         /**
-         * 超过最大录制时间
-         *
-         * @param parts 视频块
-         */
+                  * exceeds the maximum recording time
+                  *
+                  * @param parts video block
+                  */
         void onOvertakeMaxTime(ArrayList<Part> parts);
-
-        /**
-         * 视频时长改变
-         *
-         * @param duration 时长
-         */
+            /**
+                  * Video duration changes
+                  *
+                  * @param duration duration
+                  */
         void onDurationChange(long duration);
     }
 }

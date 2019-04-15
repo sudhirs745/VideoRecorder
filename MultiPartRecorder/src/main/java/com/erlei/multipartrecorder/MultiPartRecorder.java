@@ -137,7 +137,7 @@ public class MultiPartRecorder extends VideoRecorderHandler implements IVideoRec
     }
 
     private File getOutPut() {
-        //还是优先使用之前设置的文件存放路径
+        //Or prefer to use the file storage path set before-
         String outputPath = mConfig.getOutputPath();
         if (outputPath == null) {
             File filesDir = mConfig.getContext().getExternalFilesDir(Environment.DIRECTORY_MOVIES);
@@ -157,7 +157,7 @@ public class MultiPartRecorder extends VideoRecorderHandler implements IVideoRec
     }
 
     /**
-     * 合并视频片段
+     * Merge video clips
      */
     public AsyncTask<Part, Float, File> mergeVideoParts() {
         if (mParts == null || mParts.isEmpty()) return null;

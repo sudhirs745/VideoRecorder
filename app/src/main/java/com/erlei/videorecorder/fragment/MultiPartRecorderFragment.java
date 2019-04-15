@@ -80,18 +80,14 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
         mRecorderIndicator.setRecordListener(new MultiPartRecorderView.RecordListener() {
 
             /**
-             * 超过最小录制时间
+             * More than the minimum recording time
              */
             @Override
             public void onOvertakeMinTime() {
 
             }
 
-            /**
-             * 超过最大录制时间
-             *
-             * @param parts 视频块
-             */
+
             @Override
             public void onOvertakeMaxTime(ArrayList<MultiPartRecorderView.Part> parts) {
                 disableRecordButton();
@@ -104,11 +100,7 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
                 }, 200);
             }
 
-            /**
-             * 视频时长改变
-             *
-             * @param duration 时长
-             */
+
             @Override
             public void onDurationChange(long duration) {
 
@@ -164,14 +156,17 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
                 return mGestureDetector.onTouchEvent(v, event);
             }
         });
-        view.findViewById(R.id.btnNext).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.ivNext).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mRecorderIndicator.removeAllPart();
                 AsyncTask<MultiPartRecorder.Part, Float, File> task = mRecorder.mergeVideoParts();
+
+
+
             }
         });
-        view.findViewById(R.id.btnRemove).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.ivRemove).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!mRecorderIndicator.lastPartRemoved()) {
@@ -198,8 +193,8 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
 
             @Override
             public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-                //退到后台可能不会调用onSurfaceTextureDestroyed这个方法
-                // , 如果之后又打开了其他相机app , 会导致重新进入时没有开启预览
+                //Back to the background may not call onSurfaceTextureDestroyed this method
+                // ,If you open another camera app later, it will cause the preview to not open when you re-enter
                 stopPreview();
                 surface.release();
                 return true;
@@ -217,7 +212,7 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
             }
         });
 
-        view.findViewById(R.id.ivSettings).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.tv_filter).setOnClickListener(new View.OnClickListener() {
 
             private SettingsDialogFragment mSettingsDialogFragment;
 
@@ -299,7 +294,7 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
 
     private void initRecorder() {
         ICameraPreview cameraPreview = new DefaultCameraPreview(mTextureView);
-//        ICameraPreview cameraPreview = new OffscreenCameraPreview(getContext(), 1920, 1920); //离屏录制
+//        ICameraPreview cameraPreview = new OffscreenCameraPreview(getContext(), 1920, 1920); //Off-screen recording
 
         Camera.CameraBuilder cameraBuilder = new Camera.CameraBuilder(getActivity())
                 .useDefaultConfig()
@@ -308,7 +303,7 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
                 .setRecordingHint(true)
                 .setFocusMode(android.hardware.Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
 
-        //视频效果管理器
+        //Video effects manager
         mEffectsManager = new EffectsManager();
         mEffectsManager.addEffect(new CanvasOverlayEffect() {
             private FPSCounterFactory.FPSCounter1 mCounter;
@@ -329,7 +324,7 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
 
             @Override
             protected void drawCanvas(Canvas canvas) {
-                canvas.drawText(String.format(Locale.getDefault(), "%.2f", mCounter.getFPS()), canvas.getWidth() / 2, canvas.getHeight() / 2, mPaint);
+                //canvas.drawText(String.format(Locale.getDefault(), "%.2f", mCounter.getFPS()), canvas.getWidth() / 2, canvas.getHeight() / 2, mPaint);
             }
         });
 
@@ -342,7 +337,7 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
                 .setFrameRate(30)
                 .setChannelCount(1);
 
-        //分段录制,回删支持
+        //Segment recording, back to deletion support
         MultiPartRecorder.Builder multiBuilder = new MultiPartRecorder.Builder(builder);
         mRecorder = multiBuilder
                 .addPartListener(new MultiPartRecorder.VideoPartListener() {
@@ -388,7 +383,7 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
                     }
 
                     /**
-                     * 合并进度
+                     * Merger progress
                      *
                      * @param value 0 - 1
                      */
@@ -417,7 +412,7 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
     @Override
     public void setPreviewSize(Size item) {
         if (item.equals(mCameraController.getCameraSize())) return;
-        //重新设置相机的预览分辨率 , 并调用onSizeChanged更新渲染的纹理坐标
+        //Reset the camera's preview resolution and call onSizeChanged to update the rendered texture coordinates.
         Camera.CameraBuilder cameraBuilder = mCameraController.getCameraBuilder();
         cameraBuilder.setPreviewSize(item);
         mCameraController.setCameraBuilder(cameraBuilder);
@@ -427,7 +422,7 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
         mRecorder.onSizeChanged(surfaceSize.getWidth(), surfaceSize.getHeight());
     }
 
-    // TODO: 2018/6/26 暂时让他泄露吧~
+
     @SuppressLint("HandlerLeak")
     private class CallbackHandler extends VideoRecorderHandler {
 
@@ -435,7 +430,7 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
 
         @Override
         protected void handleUpdateFPS(float fps) {
-            mTvFps.setText(String.format(Locale.getDefault(), "%.2f", fps));
+         //   mTvFps.setText(String.format(Locale.getDefault(), "%.2f", fps));
         }
 
         @SuppressLint("ShowToast")

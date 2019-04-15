@@ -87,7 +87,7 @@ public class VideoRecorder implements RenderThread.RenderCallBack, IVideoRecorde
     }
 
     /**
-     * @return 混合器是否正在运行
+     * @return Is the mixer running?
      */
     @Override
     public boolean isMuxerRunning() {
@@ -104,9 +104,7 @@ public class VideoRecorder implements RenderThread.RenderCallBack, IVideoRecorde
         return mRenderThread.getSurfaceTexture();
     }
 
-    /**
-     * 拍照
-     */
+
     @Override
     public synchronized void takePicture(TakePictureCallback callback) {
         mTakePicture = true;
@@ -244,18 +242,18 @@ public class VideoRecorder implements RenderThread.RenderCallBack, IVideoRecorde
     }
 
     /**
-     * 渲染一帧
+     *
      *
      * @param renderer
      * @param windowSurface
-     * @return swapBuffers
+     * @return
      */
     @Override
     public synchronized boolean onDrawFrame(CameraGLRenderer renderer, EglSurfaceBase windowSurface) {
         boolean swapBuffers;
         long startTime = System.currentTimeMillis();
-        //使用mSync同步锁将导致录制开始的时候卡顿一下
-//        && !mRequestStart && !mRequestStop
+       // Using mSync sync lock will cause the recording to start at the beginning of the recording
+      // && !mRequestStart && !mRequestStop
         if (mInputWindowSurface != null && mVideoEncoder != null && mRecordEnabled && mMuxerRunning && mPreviewState) {
             if (GLUtil.GL_VERSION >= 3) {
 
@@ -329,17 +327,17 @@ public class VideoRecorder implements RenderThread.RenderCallBack, IVideoRecorde
             return this;
         }
 
-        /**
-         * 设置期望的帧率
-         * 默认为25
-         */
+           /**
+                  * Set the desired frame rate
+                  * The default is 25
+                  */
         public Builder setFrameRate(int frameRate) {
             mP.frameRate = frameRate;
             return this;
         }
 
         /**
-         * 设置声道数
+         * Set the number of channels
          */
         public Builder setChannelCount(@IntRange(from = 1, to = 2) int channelCount) {
             mP.audioChannelCount = channelCount;
@@ -347,8 +345,8 @@ public class VideoRecorder implements RenderThread.RenderCallBack, IVideoRecorde
         }
 
         /**
-         * 设置音频采样率
-         * 默认为 44100
+         * Set the audio sample rate
+         *          * The default is 44100
          */
         public Builder setAudioSampleRate(int sampleRate) {
             mP.audioSampleRate = sampleRate;
@@ -356,25 +354,26 @@ public class VideoRecorder implements RenderThread.RenderCallBack, IVideoRecorde
         }
 
         /**
-         * @param bitRate 设置视频比特率
-         *                默认为 width * height *  3 * 4
-         */
+                  * @param bitRate set the video bitrate
+                  * defaults to width * height * 3 * 4
+                  */
+
         public Builder setVideoBitRate(int bitRate) {
             mP.videoBitRate = bitRate;
             return this;
         }
 
         /**
-         * @param bitRate 设置音频比特率
-         *                默认为 64000
-         */
+                  * @param bitRate sets the audio bitrate
+                  * The default is 64000
+                  */
         public Builder setAudioBitRate(int bitRate) {
             mP.audioBitRate = bitRate;
             return this;
         }
 
         /**
-         * 设置关键帧间隔
+         * Set keyframe interval
          */
         public Builder setIFrameInterval(int interval) {
             mP.iFrameInterval = interval;
@@ -382,7 +381,7 @@ public class VideoRecorder implements RenderThread.RenderCallBack, IVideoRecorde
         }
 
         /**
-         * @param listener 纹理绘制监听
+         * @param listener Texture drawing monitor
          */
         public Builder setDrawTextureListener(OnDrawTextureListener listener) {
             mP.mDrawTextureListener = listener;
@@ -390,23 +389,23 @@ public class VideoRecorder implements RenderThread.RenderCallBack, IVideoRecorde
         }
 
         /**
-         * @param file 设置输出文件 , 无论一个 VideoRecorder实例开启几次录制 , 之后最后一次的录制文件会保存
-         */
+         * @param file Set the output file, no matter how many times a VideoRecorder instance is recorded, the last recording will be saved.
+         *          */
         public Builder setOutPutFile(File file) {
             mP.mOutputFile = file;
             return this;
         }
 
         /**
-         * @param outputPath 输出文件夹 , 只有沒 setOutPutFile ,这个属性才会起作用, 每一次startRecord都会生成一个新的文件
-         */
+         * @param outputPath Output folder, this property will only work if there is no setOutPutFile , each time startRecord will generate a new file
+         *          */
         public Builder setOutPutPath(String outputPath) {
             mP.outputPath = outputPath;
             return this;
         }
 
         /**
-         * @param enable 是否启用FPS日志输出
+         * @param enable Whether to enable FPS log output
          */
         public Builder setLogFPSEnable(boolean enable) {
             mP.logFPS = enable;

@@ -18,7 +18,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="预览分辨率"
+                android:text="Preview resolution"
                 android:textColor="@color/grey_1000"
                 android:textSize="16sp" />
 
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="闪光灯模式"
+                android:text="Flash mode"
                 android:textColor="@color/grey_1000"
                 android:textSize="16sp" />
 
@@ -50,16 +50,18 @@
                 android:layout_gravity="end"
                 android:spinnerMode="dropdown" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="预览帧率区间"
+                android:text="Preview frame rate interval"
                 android:textColor="@color/grey_1000"
                 android:textSize="16sp" />
 
@@ -74,13 +76,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="防闪烁"
+                android:text="Anti-flash"
                 android:textColor="@color/grey_1000"
                 android:textSize="16sp" />
 
@@ -101,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="颜色效果"
+                android:text="Color effect"
                 android:textColor="@color/grey_1000"
                 android:textSize="16sp" />
 
@@ -122,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="对焦模式"
+                android:text="Focus mode"
                 android:textColor="@color/grey_1000"
                 android:textSize="16sp" />
 
@@ -143,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="白平衡"
+                android:text="White balance"
                 android:textColor="@color/grey_1000"
                 android:textSize="16sp" />
 
@@ -164,7 +167,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="场景模式"
+                android:text="Scene mode"
                 android:textColor="@color/grey_1000"
                 android:textSize="16sp" />
 
@@ -179,13 +182,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="感光度"
+                android:text="Sensitivity"
                 android:textColor="@color/grey_1000"
                 android:textSize="16sp" />
 
@@ -206,7 +210,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="相机缩放"
+                android:text="Camera zoom"
                 android:textColor="@color/grey_1000"
                 android:textSize="16sp" />
 
