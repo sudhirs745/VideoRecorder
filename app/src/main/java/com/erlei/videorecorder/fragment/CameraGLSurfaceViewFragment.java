@@ -73,7 +73,7 @@ public class CameraGLSurfaceViewFragment extends Fragment implements SettingsDia
         mRecorderIndicator.setRecordListener(new MultiPartRecorderView.RecordListener() {
 
             /**
-             * 超过最小录制时间
+             * More than the minimum recording time
              */
             @Override
             public void onOvertakeMinTime() {
@@ -81,9 +81,9 @@ public class CameraGLSurfaceViewFragment extends Fragment implements SettingsDia
             }
 
             /**
-             * 超过最大录制时间
+             * More than the maximum recording time
              *
-             * @param parts 视频块
+             * @param parts Video block
              */
             @Override
             public void onOvertakeMaxTime(ArrayList<MultiPartRecorderView.Part> parts) {
@@ -98,9 +98,9 @@ public class CameraGLSurfaceViewFragment extends Fragment implements SettingsDia
             }
 
             /**
-             * 视频时长改变
+             * Video duration changes
              *
-             * @param duration 时长
+             * @param duration duration
              */
             @Override
             public void onDurationChange(long duration) {
@@ -333,7 +333,7 @@ public class CameraGLSurfaceViewFragment extends Fragment implements SettingsDia
                     }
 
                     /**
-                     * 合并进度
+                     * Merger progress
                      *
                      * @param value 0 - 1
                      */
@@ -362,7 +362,7 @@ public class CameraGLSurfaceViewFragment extends Fragment implements SettingsDia
     @Override
     public void setPreviewSize(Size item) {
         if (item.equals(mCameraController.getCameraSize())) return;
-        //重新设置相机的预览分辨率 , 并调用onSizeChanged更新渲染的纹理坐标
+        //Reset the camera's preview resolution and call onSizeChanged to update the rendered texture coordinates.
         Camera.CameraBuilder cameraBuilder = mCameraController.getCameraBuilder();
         cameraBuilder.setPreviewSize(item);
         mCameraController.setCameraBuilder(cameraBuilder);
@@ -372,7 +372,7 @@ public class CameraGLSurfaceViewFragment extends Fragment implements SettingsDia
         mRecorder.onSizeChanged(surfaceSize.getWidth(), surfaceSize.getHeight());
     }
 
-    // TODO: 2018/6/26 暂时让他泄露吧~
+
     @SuppressLint("HandlerLeak")
     private class CallbackHandler extends VideoRecorderHandler {
 
@@ -380,7 +380,7 @@ public class CameraGLSurfaceViewFragment extends Fragment implements SettingsDia
 
         @Override
         protected void handleUpdateFPS(float fps) {
-            mTvFps.setText(String.format(Locale.getDefault(), "%.2f", fps));
+          //  mTvFps.setText(String.format(Locale.getDefault(), "%.2f", fps));
         }
 
         @SuppressLint("ShowToast")

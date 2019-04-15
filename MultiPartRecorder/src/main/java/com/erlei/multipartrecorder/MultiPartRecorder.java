@@ -197,7 +197,7 @@ public class MultiPartRecorder extends VideoRecorderHandler implements IVideoRec
     }
 
     /**
-     * @return 混合器是否正在运行
+     * @return Is the mixer running?
      */
     @Override
     public boolean isMuxerRunning() {
