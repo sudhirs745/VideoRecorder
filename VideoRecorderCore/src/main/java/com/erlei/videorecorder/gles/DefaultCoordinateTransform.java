@@ -59,7 +59,7 @@ public class DefaultCoordinateTransform extends CoordinateTransform {
         }
         LogUtil.logd(TAG, "scale = " + scale + "\t\t dx = " + (dx / cameraWidth) + "\t\t dy = " + (dy / cameraHeight));
         Matrix.scaleM(modelMatrix, 0, scale, scale, 0f);
-        // TODO: 2018/5/22 这个地方最好需要平移一下 ， 不过不平移也看不出来 ，
+
         // 算法错误 ，需要重新大量测试一下 ， 在高分辨率下平移没问题 ， 低分辨率平移有毛病
         //Matrix.translateM(modelMatrix, 0, dx / cameraWidth,  dy / cameraHeight, 0f);
         return modelMatrix;

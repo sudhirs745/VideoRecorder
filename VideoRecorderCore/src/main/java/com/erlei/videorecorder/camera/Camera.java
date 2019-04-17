@@ -41,10 +41,6 @@ import static android.view.Surface.ROTATION_270;
 import static android.view.Surface.ROTATION_90;
 
 
-/**
- * Created by lll on 2018/1/18.
- * 相机工具类
- */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class Camera {
     private static final String S_CAMERA_SUPPORTED_MODES = "camera_supported_modes";
@@ -54,43 +50,43 @@ public class Camera {
      */
     public static final int NO_CAMERA = 1;
     /**
-     * CameraBuilder == null , 不应该发生
+     * CameraBuilder == null , Should not happen
      */
     public static final int NOT_CONFIGURED = 2;
 
     /**
-     * 设置的相机朝向设备不支持
+     * Set camera orientation device is not supported
      *
      * @see CameraBuilder#setFacing(int)
      */
     public static final int UNSUPPORTED_FACING = 3;
 
     /**
-     * 打开相机失败  (请检查权限)
+     * Failed to open the camera (please check the permissions)
      *
      * @see android.hardware.Camera#open()
      */
     public static final int OPEN_ERROR = 4;
 
     /**
-     * 成功连接相机服务并开启预览
+     * Successfully connected camera service and preview
      */
     public static final int SUCCESS = 5;
     /**
-     * 开启预览失败
+     * Turn on preview failed
      */
     public static final int PREVIEW_ERROR = 6;
     /**
-     * 未知错误
+     * unknown mistake
      */
     public static final int UNKNOWN = 7;
 
     /**
-     * 不支持的预览尺寸
+     * Unsupported preview size
      */
     public static final int UNSUPPORTED_PREVIEW_SIZE = 8;
     /**
-     * 不支持的拍照尺寸
+     * Unsupported photo size
      */
     public static final int UNSUPPORTED_PICTURE_SIZE = 9;
 
@@ -113,7 +109,7 @@ public class Camera {
     }
 
     /**
-     * 获取相机的方向
+     * Get the direction of the camera
      *
      * @return 0 , 90, 180 , 270
      */
@@ -130,22 +126,22 @@ public class Camera {
     }
 
     /**
-     * 打开摄像机
+     * Turn on the camera
      *
-     * @return 是否成功
+     * @return whether succeed
      */
     @Nullable
     public synchronized Camera open() {
         int cameras = android.hardware.Camera.getNumberOfCameras();
         if (cameras == 0) {
-            loge("该设备没有相机可用");
-            handleCameraCallback(NO_CAMERA, "该设备没有相机可用");
+            loge("The device has no camera available");
+            handleCameraCallback(NO_CAMERA, "The device has no camera available");
             return null;
         }
         if (mBuilder == null) {
-            loge("没有配置相机");
-            handleCameraCallback(NOT_CONFIGURED, "没有配置相机");
-            throw new IllegalStateException("没有配置相机");
+            loge("No camera configured");
+            handleCameraCallback(NOT_CONFIGURED, "No camera configured");
+            throw new IllegalStateException("No camera configured");
         }
         android.hardware.Camera.CameraInfo cameraInfo = new android.hardware.Camera.CameraInfo();
         for (int i = 0; i < cameras; i++) {
@@ -153,8 +149,8 @@ public class Camera {
             if (cameraInfo.facing == mBuilder.mFacing) mCameraId = i;
         }
         if (mCameraId == -1) {
-            loge("设置的相机方向该设备不支持");
-            handleCameraCallback(UNSUPPORTED_FACING, "设置的相机方向该设备不支持");
+            loge("Set the camera orientation that the device does not support");
+            handleCameraCallback(UNSUPPORTED_FACING, "Set the camera orientation that the device does not support");
             return null;
         }
         try {
@@ -197,7 +193,7 @@ public class Camera {
     }
 
     /**
-     * @return 获取预览的尺寸 该方法需要在相机成功预览之后调用才会有正确结果
+     * @return Get the size of the preview. This method needs to be called after the camera is successfully previewed to have the correct result.
      */
     public Size getPreviewSize() {
         return new Size(mPreviewSize);
@@ -206,6 +202,7 @@ public class Camera {
     /**
      * @return activity is  landscape
      */
+
     public boolean isLandscape() {
         WindowManager windowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         if (windowManager != null && windowManager.getDefaultDisplay() != null) {
@@ -221,51 +218,51 @@ public class Camera {
         if (mCamera == null) return;
         android.hardware.Camera.Parameters cameraParameters = getParameters();
         if (cameraParameters == null) return;
-        //设置对焦模式
+        // Set the focus mode
         setFocusMode(cameraParameters, mBuilder.mFocusModes);
 
-        //设置闪光灯模式
+        //Set flash mode
         setFlashMode(cameraParameters, mBuilder.mFlashModes);
 
-        //设置场景模式
+        //Set scene mode
         setSceneMode(cameraParameters, mBuilder.mSceneModes);
 
-        //色彩效果
+        //Color effect
         setColorEffect(cameraParameters, mBuilder.mColorEffects);
 
-        //白平衡
+        //White balance
         setWhiteBalance(cameraParameters, mBuilder.mWhiteBalances);
 
-        //刷新率
+        //Refresh rate
         setAntibanding(cameraParameters, mBuilder.mAntibanding);
 
-        //设置预览帧的像素格式
+        //Set the pixel format of the preview frame
         int previewFormat = getSupportedModelOfInt(cameraParameters.getSupportedPreviewFormats(), mBuilder.mPreviewFormats);
         if (previewFormat != -1) cameraParameters.setPreviewFormat(previewFormat);
 
-        //设置图片的像素格式
+        //Set the pixel format of the image
         int pictureFormat = getSupportedModelOfInt(cameraParameters.getSupportedPictureFormats(), mBuilder.mPictureFormats);
         if (pictureFormat != -1) cameraParameters.setPictureFormat(pictureFormat);
 
-        //是否是录制模式
+        //Whether it is recording mode
         cameraParameters.setRecordingHint(mBuilder.mRecordingHint);
 
 
-        //设置预览大小
+        //Set preview size
         if (mBuilder.mPreviewSizeSelector != null) {
             mPreviewSize = mBuilder.mPreviewSizeSelector.select(cameraParameters.getSupportedPreviewSizes(), mBuilder.mPreviewSize);
         } else {
             mPreviewSize = getOptimalSize("SupportedPreviewSizes", cameraParameters.getSupportedPreviewSizes(), mBuilder.mPreviewSize);
         }
         if (mPreviewSize == null) {
-            handleCameraCallback(UNSUPPORTED_PREVIEW_SIZE, "没有找到合适的预览尺寸");
-            throw new IllegalStateException("没有找到合适的预览尺寸");
+            handleCameraCallback(UNSUPPORTED_PREVIEW_SIZE, "Set preview size");
+            throw new IllegalStateException("Did not find a suitable preview size");
         }
         log("requestPreviewSize ：" + mBuilder.mPreviewSize.toString() + "\t\t previewSize : " + getPreviewSize().toString());
         cameraParameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
 
 
-        //设置拍照的图片尺寸
+        //Set the size of the photo taken
         if (mBuilder.mPictureSize != null) {
             if (mBuilder.mPictureSizeSelector != null) {
                 mPictureSize = mBuilder.mPictureSizeSelector.select(cameraParameters.getSupportedPreviewSizes(), mBuilder.mPictureSize);
@@ -273,8 +270,8 @@ public class Camera {
                 mPictureSize = getOptimalSize("SupportedPictureSizes", cameraParameters.getSupportedPictureSizes(), mBuilder.mPictureSize);
             }
             if (mPictureSize == null) {
-                handleCameraCallback(UNSUPPORTED_PICTURE_SIZE, "没有找到合适的图片尺寸");
-                throw new IllegalStateException("没有找到合适的图片尺寸");
+                handleCameraCallback(UNSUPPORTED_PICTURE_SIZE, "Did not find a suitable image size");
+                throw new IllegalStateException("Did not find a suitable image size");
             }
             log("requestPictureSize ：" + mBuilder.mPictureSize.toString() + "\t\t pictureSize : " + getPictureSize().toString());
             cameraParameters.setPictureSize(mPictureSize.width, mPictureSize.height);

@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * 多段录制
+ * Multi-segment recording
  */
 public class MultiPartRecorder extends VideoRecorderHandler implements IVideoRecorder {
     static {
@@ -66,7 +66,7 @@ public class MultiPartRecorder extends VideoRecorderHandler implements IVideoRec
     }
 
     /**
-     * 拍照
+     * Take a photo
      */
     @Override
     public void takePicture(TakePictureCallback callback) {
@@ -74,17 +74,17 @@ public class MultiPartRecorder extends VideoRecorderHandler implements IVideoRec
     }
 
     /**
-     * @param delPartEnable 是否开启视频块删除
-     *                      初衷是考虑到把所有视频段放在录制结束的时候合并可能会存在过长的等待时间
-     *                      所以考虑过录制完一个分段 ,就合并, 避免最终合并时间过长 , 但是经过不完全测试 ,
-     *                      最后合并的时间消耗是可以接受的 , 暂时就这样处理吧 , 有需求再加
-     */
+           * @param delPartEnable Whether to enable video block deletion
+           * The original intention is to consider that placing all video segments at the end of the recording may have a long waiting time.
+           * So after considering recording a segment, merge it to avoid the final merge time is too long, but after incomplete testing,
+           * The time consumption of the final merger is acceptable. Please handle it for the time being.
+           */
     public void setDelPartEnable(boolean delPartEnable) {
         mDelPartEnable = delPartEnable;
     }
 
     /**
-     * 根据文件路径删除视频块
+     * Delete video blocks based on file path
      */
     public Part removePart(String path) {
         if (!mDelPartEnable || mParts.isEmpty()) return null;
@@ -95,10 +95,10 @@ public class MultiPartRecorder extends VideoRecorderHandler implements IVideoRec
     }
 
     /**
-     * 刪除最后的视频块
-     * 警告 ，这个方法不要夹在onRecordVideoPartStarted 和 onRecordVideoPartSuccess 或 onRecordVideoPartFailure 之间调用
-     * 会导致在快速切换录制状态时onRecordVideoPartSuccess 或 onRecordVideoPartFailure 回调丢失
-     */
+           * Delete the last video block
+           * Warning, this method is not called between onRecordVideoPartStarted and onRecordVideoPartSuccess or onRecordVideoPartFailure
+           * Causes loss of onRecordVideoPartSuccess or onRecordVideoPartFailure callbacks when switching between recording states quickly
+           */
     public Part removeLastPart() {
         if (!mDelPartEnable || mParts.isEmpty()) return null;
         return mParts.remove(mParts.size() - 1);
@@ -121,9 +121,10 @@ public class MultiPartRecorder extends VideoRecorderHandler implements IVideoRec
     }
 
     /**
-     * 修改普通VideoRecorder的配置 , 让他将视频块输出到指定的文件夹下,
-     * 让其支持多段录制
-     */
+           * Modify the configuration of the normal VideoRecorder, let him output the video block to the specified folder,
+           * Let it support multi-segment recording
+           */
+
     private void setOutPut(VideoRecorder.Builder builder) {
         mOutputFile = mConfig.getOutputFile();
         if (mOutputFile == null) {
@@ -308,10 +309,10 @@ public class MultiPartRecorder extends VideoRecorderHandler implements IVideoRec
         void onError(Exception e);
 
         /**
-         * 合并进度
-         *
-         * @param value 0 - 1
-         */
+                   * Merger progress
+                   *
+                   * @param value 0 - 1
+                   */
         void onProgress(float value);
     }
 
@@ -323,29 +324,29 @@ public class MultiPartRecorder extends VideoRecorderHandler implements IVideoRec
 
     public interface VideoPartListener {
         /**
-         * 一个视频块开始录制
-         *
-         * @param part 视频块
-         */
+                   * A video block starts recording
+                   *
+                   * @param part video block
+                   */
         void onRecordVideoPartStarted(Part part);
 
         /**
-         * 完成一个视频块的录制
-         *
-         * @param part 视频块
-         *             判断是否完成是根据最终生成的文件大小 , 和录制时间决定的
-         *             由于我没有找到一个好的判断条件 , 所以粗略的使用
-         *             part.file.exists() && part.duration > 300 && part.file.length() > 1000
-         *             判断了下 , 如果要求比较高可以自行使用
-         *             MediaUtil.getVideoDuration(file.getAbsolutePath()); 但是获取这个信息大概耗时100毫秒
-         */
+                   * Complete recording of a video block
+                   *
+                   * @param part video block
+                   * Judging whether the completion is based on the final file size and recording time
+                   * Because I didn't find a good judgment condition, I used it roughly.
+                   * part.file.exists() && part.duration > 300 && part.file.length() > 1000
+                   * Judging, if the requirements are higher, you can use it yourself.
+                   * MediaUtil.getVideoDuration(file.getAbsolutePath()); But getting this information takes about 100 milliseconds
+                   */
         void onRecordVideoPartSuccess(Part part);
 
         /**
-         * 一个损坏的视频
-         *
-         * @param part 视频块
-         */
+                   * A damaged video
+                   *
+                   * @param part video block
+                   */
         void onRecordVideoPartFailure(Part part);
     }
 
@@ -393,7 +394,7 @@ public class MultiPartRecorder extends VideoRecorderHandler implements IVideoRec
 
     public static class Part {
         /**
-         * 视频段的大致时长 , 是用开始录制时间 , 结束录制时间来计算的 , 包含误差(编码性能),
+         * The approximate length of the video segment is calculated by starting the recording time and ending the recording time, including the error (coding performance).
          */
         public long duration;
         public long startTimeMillis;
@@ -408,11 +409,11 @@ public class MultiPartRecorder extends VideoRecorderHandler implements IVideoRec
         public void end() {
             endTimeMillis = System.currentTimeMillis();
             duration = endTimeMillis - startTimeMillis;
-//            duration = MediaUtil.getVideoDuration(file.getAbsolutePath()); 耗时100毫秒
+//            duration = MediaUtil.getVideoDuration(file.getAbsolutePath());  //It takes 100 milliseconds
         }
 
         /**
-         * @return 是否正在录制中
+         * @return Is recording
          */
         public boolean isRecording() {
             return endTimeMillis == -1;
@@ -440,7 +441,7 @@ public class MultiPartRecorder extends VideoRecorderHandler implements IVideoRec
         @Override
         public int hashCode() {
             return file.getPath().hashCode();
-//            return file.hashCode();似乎是相等的
+//            return file.hashCode(); //Seems to be equal
         }
     }
 }

@@ -7,11 +7,7 @@ import com.erlei.videorecorder.recorder.OnDrawTextureListener;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by lll on 2018/8/6
- * Email : lllemail@foxmail.com
- * Describe : 视频特效管理器
- */
+
 public class EffectsManager implements OnDrawTextureListener {
 
     private final List<VideoEffect> mEffects = new ArrayList<>();

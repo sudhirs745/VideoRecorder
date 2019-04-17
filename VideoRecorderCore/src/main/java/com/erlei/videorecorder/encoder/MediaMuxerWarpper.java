@@ -118,10 +118,10 @@ public class MediaMuxerWarpper extends HandlerThread {
 
 
     /**
-     * 如果混合器未启动 , 那么返回false ,(重新发送到消息队列 , 并且保持原有顺序, 等待混合器启动 , 通常不会等待太久)
-     * 如果去掉重新重新发送到消息队列的逻辑 , 在某些手机上生成视频会有问题 , 比如华为 Honor 9 ,
-     * 因为第一帧的关键帧丢失 , 如果第一帧视频帧不是关键帧 , 会卡顿 , 直到播放到下一个关键帧 , 并且关键帧间隔时间小于录制的时间会导致混合器无法停止而崩溃
-     */
+           * If the mixer is not started, then return false, (re-send to the message queue, and keep the original order, wait for the mixer to start, usually does not wait too long)
+           * If you remove the logic to re-send to the message queue, there will be problems with generating video on some phones, such as Huawei Honor 9 .
+           * Because the key frame of the first frame is lost, if the first frame of the video frame is not a key frame, it will be stuck until the next key frame is played, and the key frame interval is less than the recording time, which will cause the mixer to stop and crash.
+           */
     private boolean writeSampleData(int trackIndex, ByteBuffer encodedData, MediaCodec.BufferInfo bufferInfo) {
         LogUtil.logd(TAG,"IFrame = "+((bufferInfo.flags & MediaCodec.BUFFER_FLAG_SYNC_FRAME) != 0)+"\t\t size = "+bufferInfo.size);
         if (isMuxerStarted()) {

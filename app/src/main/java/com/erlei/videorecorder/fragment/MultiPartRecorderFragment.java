@@ -1,7 +1,9 @@
 package com.erlei.videorecorder.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,9 +14,11 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.TextureView;
@@ -47,6 +51,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static android.app.Activity.RESULT_OK;
+
 public class MultiPartRecorderFragment extends Fragment implements SettingsDialogFragment.CameraControllerView {
 
     private TextureView mTextureView;
@@ -56,7 +62,10 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
     private MultiPartRecorderView mRecorderIndicator;
     private CameraController mCameraController;
     private EffectsManager mEffectsManager;
+    private TextView addSound;
 
+    public  static int AUDIO_REQUEST =1;
+    private  String tempAudioFile ;
 
     public static MultiPartRecorderFragment newInstance() {
         return new MultiPartRecorderFragment();
@@ -75,6 +84,7 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
         mTextureView = view.findViewById(R.id.textureView);
         mBtnRecord = view.findViewById(R.id.cbRecord);
         mTvFps = view.findViewById(R.id.tvFps);
+        addSound= view.findViewById(R.id.add_sound);
         mRecorderIndicator = view.findViewById(R.id.recorderIndicator);
         mRecorderIndicator.setMaxDuration(60 * 3);
         mRecorderIndicator.setRecordListener(new MultiPartRecorderView.RecordListener() {
@@ -107,6 +117,17 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
             }
         });
 
+        addSound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent videoIntent = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(Intent.createChooser(videoIntent, "Select Audio"), AUDIO_REQUEST);
+
+            }
+        });
         mBtnRecord.setOnTouchListener(new View.OnTouchListener() {
             private final RecordGestureDetector mGestureDetector = new RecordGestureDetector(new RecordGestureDetector.SimpleOnGestureListener() {
                 private static final String TAG = "TouchGestureDetector";
@@ -161,7 +182,6 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
             public void onClick(View v) {
                 mRecorderIndicator.removeAllPart();
                 AsyncTask<MultiPartRecorder.Part, Float, File> task = mRecorder.mergeVideoParts();
-
 
 
             }
@@ -430,7 +450,7 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
 
         @Override
         protected void handleUpdateFPS(float fps) {
-         //   mTvFps.setText(String.format(Locale.getDefault(), "%.2f", fps));
+            //   mTvFps.setText(String.format(Locale.getDefault(), "%.2f", fps));
         }
 
         @SuppressLint("ShowToast")
@@ -444,5 +464,44 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
             mToast.show();
         }
     }
+
+    @SuppressLint("RestrictedApi")
+    @Override
+    public void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AUDIO_REQUEST && null != data) {
+            if (requestCode == AUDIO_REQUEST) {
+
+                Uri uri = data.getData();
+                try {
+                    String uriString = uri.toString();
+//                    File myFile = new File(uriString);
+//                    //    String path = myFile.getAbsolutePath();
+                    String displayName = null;
+                    String path2 = getAudioPath(uri);
+                    File f = new File(path2);
+
+                    Log.e("url details" , " data -- " +f.getAbsolutePath());
+
+                } catch (Exception e) {
+                    //handle exception
+                    Toast.makeText(getActivity(), "Unable to process,try again", Toast.LENGTH_SHORT).show();
+                }
+                //   String path1 = uri.getPath();
+
+            }
+        }
+
+    }
+
+    private String getAudioPath(Uri uri) {
+        String[] data = {MediaStore.Audio.Media.DATA};
+        CursorLoader loader = new CursorLoader(getActivity(), uri, data, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
 }
 
