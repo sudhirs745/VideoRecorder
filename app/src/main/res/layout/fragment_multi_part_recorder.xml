@@ -83,7 +83,7 @@
                 android:id="@+id/tv_filter"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:drawableTop="@drawable/ic_filters_black_24dp"
+                android:drawableTop="@mipmap/fliters"
                 android:layout_marginTop="16dp"
                 android:text="Filters"
                 android:textSize="12dp"
@@ -92,9 +92,10 @@
                 />
 
             <TextView
+                android:id="@+id/tv_beauty"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:drawableTop="@mipmap/heart_icon"
+                android:drawableTop="@mipmap/beauty"
                 android:layout_marginTop="16dp"
                 android:text="Beauty"
                 android:textSize="12dp"
@@ -114,14 +115,13 @@
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:drawableTop="@drawable/ic_timer_black_24dp"
+                android:drawableTop="@mipmap/timers"
                 android:layout_marginTop="16dp"
                 android:text="Timer"
                 android:textSize="12dp"
                 android:textColor="@android:color/white"
                 android:gravity="center"
                 />
-
         </LinearLayout>
 
         </RelativeLayout>

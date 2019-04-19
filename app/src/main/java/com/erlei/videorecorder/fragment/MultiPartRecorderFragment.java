@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
@@ -31,6 +32,7 @@ import android.widget.Toast;
 
 import com.erlei.multipartrecorder.MultiPartRecorder;
 import com.erlei.multipartrecorder.widget.MultiPartRecorderView;
+import com.erlei.videorecorder.BottomSheetFragment;
 import com.erlei.videorecorder.BuildConfig;
 import com.erlei.videorecorder.R;
 import com.erlei.videorecorder.camera.Camera;
@@ -200,6 +202,22 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
 
             }
         });
+
+        TextView tv_beauty = view.findViewById(R.id.tv_beauty);
+        tv_beauty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                BottomSheetDialogFragment bottomSheetDialogFragment = new BottomSheetFragment();
+                bottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), "Bottom Sheet Dialog Fragment");
+
+            }
+        });
+
+
+
+
+
         mTextureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             @Override
             public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
@@ -474,6 +492,7 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
 
                 Uri uri = data.getData();
                 try {
+
                     String uriString = uri.toString();
 //                    File myFile = new File(uriString);
 //                    //    String path = myFile.getAbsolutePath();
