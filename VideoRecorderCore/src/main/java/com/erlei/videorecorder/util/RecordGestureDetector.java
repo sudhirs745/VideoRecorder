@@ -8,9 +8,7 @@ import android.view.View;
 
 import java.lang.ref.WeakReference;
 
-/**
- * 点击拍摄 , 长按录制手势处理器
- */
+
 public class RecordGestureDetector {
 
     private static final int LONG_PRESS = 1;

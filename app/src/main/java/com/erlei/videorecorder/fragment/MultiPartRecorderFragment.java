@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.SurfaceTexture;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -35,6 +36,7 @@ import com.erlei.multipartrecorder.widget.MultiPartRecorderView;
 import com.erlei.videorecorder.BottomSheetFragment;
 import com.erlei.videorecorder.BuildConfig;
 import com.erlei.videorecorder.R;
+import com.erlei.videorecorder.VideoPlayer;
 import com.erlei.videorecorder.camera.Camera;
 import com.erlei.videorecorder.camera.Size;
 import com.erlei.videorecorder.effects.CanvasOverlayEffect;
@@ -66,8 +68,10 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
     private EffectsManager mEffectsManager;
     private TextView addSound;
 
+    public  String  tempAudioFile;
     public  static int AUDIO_REQUEST =1;
-    private  String tempAudioFile ;
+
+    public  MediaPlayer mediaPlayer ;
 
     public static MultiPartRecorderFragment newInstance() {
         return new MultiPartRecorderFragment();
@@ -140,6 +144,10 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
                     view.animate().scaleX(0.8f).scaleY(0.8f).setDuration(200).start();
                     view.setSelected(true);
                     startRecord();
+                  if(mediaPlayer!=null){
+                    mediaPlayer.start();
+                  }
+
                 }
 
                 @Override
@@ -147,6 +155,11 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
                     view.animate().scaleX(1f).scaleY(1f).setDuration(200).start();
                     view.setSelected(false);
                     stopRecord();
+
+                    if(mediaPlayer!=null){
+                        mediaPlayer.pause();
+                    }
+
                     LogUtil.logd(TAG, "onLongPressUp");
                 }
 
@@ -182,6 +195,7 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
         view.findViewById(R.id.ivNext).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 mRecorderIndicator.removeAllPart();
                 AsyncTask<MultiPartRecorder.Part, Float, File> task = mRecorder.mergeVideoParts();
 
@@ -381,12 +395,12 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
                 .addPartListener(new MultiPartRecorder.VideoPartListener() {
                     @Override
                     public void onRecordVideoPartStarted(MultiPartRecorder.Part part) {
-                        LogUtil.logd("onRecordVideoPartStarted \t" + part.toString());
+                        LogUtil.loge("onRecordVideoPartStarted \t" + part.toString());
                     }
 
                     @Override
                     public void onRecordVideoPartSuccess(MultiPartRecorder.Part part) {
-                        LogUtil.logd("onRecordVideoPartSuccess \t" + part.toString());
+                        LogUtil.loge("onRecordVideoPartSuccess \t" + part.toString());
                     }
 
                     @Override
@@ -399,20 +413,36 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
                 .setMergeListener(new MultiPartRecorder.VideoMergeListener() {
                     @Override
                     public void onStart() {
-                        LogUtil.logd("merge onStart");
+                        LogUtil.loge("merge onStart");
                     }
 
                     @Override
                     public void onSuccess(File outFile) {
-                        LogUtil.logd("merge Success \t" + outFile);
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        if (Build.VERSION.SDK_INT >= 24) {
-                            intent.setDataAndType(FileProvider.getUriForFile(getContext().getApplicationContext(), BuildConfig.APPLICATION_ID + ".provider", outFile), "video/*");
-                            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                        } else {
-                            intent.setDataAndType(Uri.fromFile(outFile), "video/*");
+
+                        LogUtil.loge("merge Success \t" +  outFile.getAbsolutePath());
+
+                        LogUtil.loge("merge Success \t" + outFile);
+
+                        if(mediaPlayer!=null) {
+                            mediaPlayer.stop();
+                            mediaPlayer.release();
+                            mediaPlayer=null;
                         }
+
+                        Intent intent = new Intent(getActivity(), VideoPlayer.class);
+                        intent.putExtra("file_path",outFile.getAbsolutePath());
                         startActivity(intent);
+
+//                        Intent intent = new Intent(Intent.ACTION_VIEW);
+//                        if (Build.VERSION.SDK_INT >= 24) {
+//                            intent.setDataAndType(FileProvider.getUriForFile(getContext().getApplicationContext(), BuildConfig.APPLICATION_ID + ".provider", outFile), "video/*");
+//                            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                        } else {
+//                            intent.setDataAndType(Uri.fromFile(outFile), "video/*");
+//                        }
+//                        startActivity(intent);
+
+
                     }
 
                     @Override
@@ -475,9 +505,9 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
         @Override
         protected void handleVideoMuxerStopped(String output) {
             if (mToast != null) {
-                mToast.setText(output);
+                mToast.setText("1");
             } else {
-                mToast = Toast.makeText(getContext(), output, Toast.LENGTH_SHORT);
+                mToast = Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT);
             }
             mToast.show();
         }
@@ -498,6 +528,18 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
 //                    //    String path = myFile.getAbsolutePath();
                     String displayName = null;
                     String path2 = getAudioPath(uri);
+                    tempAudioFile=path2;
+
+                   // String filePath = Environment.getExternalStorageDirectory()+tempAudioFile;
+
+                    if(tempAudioFile!=null) {
+                        mediaPlayer = new MediaPlayer();
+                        mediaPlayer.setDataSource(tempAudioFile);
+                        mediaPlayer.prepare();
+                      //  mediaPlayer.start();
+                    }
+
+                    Log.e("url path2" , " data -- " +path2);
                     File f = new File(path2);
 
                     Log.e("url details" , " data -- " +f.getAbsolutePath());
@@ -519,6 +561,8 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
         Cursor cursor = loader.loadInBackground();
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
         cursor.moveToFirst();
+
+        Log.e("url getAudioPath-- " ,cursor.getString(column_index));
         return cursor.getString(column_index);
     }
 

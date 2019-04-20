@@ -261,16 +261,7 @@ public class MultiPartRecorderView extends View {
         return duration;
     }
 
-    /**
-     * Map a value within a given range to another range.
-     *
-     * @param value    the value to map
-     * @param fromLow  the low end of the range the value is within
-     * @param fromHigh the high end of the range the value is within
-     * @param toLow    the low end of the range to map to
-     * @param toHigh   the high end of the range to map to
-     * @return the mapped value
-     */
+
     private static double mapValue(
             double value,
             double fromLow,

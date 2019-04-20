@@ -24,7 +24,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
     private ArrayList<FilterModel> filterModelArrayList = new ArrayList<>();
     private Context mContext;
 
-    public FilterAdapter(ArrayList<FilterModel> filterModelArrayList, Context mContext ){
+    public FilterAdapter(ArrayList<FilterModel> filterModelArrayList, Context mContext , FilterInterface filterInterface ){
         this.filterModelArrayList=filterModelArrayList;
         this.mContext = mContext;
         this.filterInterface= filterInterface;
@@ -51,7 +51,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //filterInterface.onItemClick(filterModel.getCategory_name());
+                filterInterface.onItemClick(filterModel.getCategory_name());
             }
         });
 
