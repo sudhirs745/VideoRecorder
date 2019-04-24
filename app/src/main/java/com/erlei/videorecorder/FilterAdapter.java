@@ -47,11 +47,17 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
 
         holder.name.setText(filterModel.getCategory_name());
         holder.image.setImageResource(filterModel.getCategory_image());
+        holder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterInterface.onItemClick(position);
+            }
+        });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                filterInterface.onItemClick(filterModel.getCategory_name());
+                filterInterface.onItemClick(position);
             }
         });
 

@@ -88,7 +88,7 @@ public class VideoRecorderFragment extends Fragment implements SurfaceHolder.Cal
         mRecorder.stopPreview();
     }
 
-    // TODO: 2018/6/26 暂时让他泄露吧~
+
     @SuppressLint("HandlerLeak")
     private class CallbackHandler extends VideoRecorderHandler {
         @Override

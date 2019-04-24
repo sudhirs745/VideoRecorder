@@ -9,10 +9,11 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class BottomSheetFragment extends BottomSheetDialogFragment {
+public class BottomSheetFragment extends BottomSheetDialogFragment implements  FilterInterface{
 
     ArrayList  Number;
 
@@ -29,6 +30,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
 
         @Override
         public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
         }
     };
 
@@ -47,7 +49,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
             FilterModel category = new FilterModel("F "+(i+1), R.mipmap.header_icon_1);
             filterModels.add(category);
         }
-        recyclerView.setAdapter(new FilterAdapter(filterModels, getActivity() ));
+        recyclerView.setAdapter(new FilterAdapter(filterModels, getActivity(),this ));
 
         //Set the coordinator layout behavior
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) contentView.getParent()).getLayoutParams();
@@ -62,5 +64,11 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
     }
 
 
+    @Override
+    public void onItemClick(int item) {
 
+      //  Camera.Parameters cameraParameters = mCameraController.getCameraParameters();
+        Toast.makeText(getActivity(),item+" ",Toast.LENGTH_LONG).show();
+
+    }
 }

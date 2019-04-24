@@ -14,10 +14,7 @@ import com.erlei.videorecorder.camera.Camera;
 import com.erlei.videorecorder.camera.Size;
 import com.erlei.videorecorder.util.LogUtil;
 
-/**
- * Created by lll on 2018/1/20.
- * 打开一个相机预览
- */
+
 public class SurfaceViewFragment extends Fragment implements SurfaceHolder.Callback, Camera.CameraCallback {
 
     private SurfaceView mSurfaceView;
@@ -70,9 +67,7 @@ public class SurfaceViewFragment extends Fragment implements SurfaceHolder.Callb
         if (mCamera != null) mCamera.close();
     }
 
-    /**
-     * 打开相机预览成功 ， 可以在这个回调里根据camera.getPreviewSize() 重新调整SurfaceView的大小比例 ， 避免预览变形
-     */
+
     @Override
     public void onSuccess(Camera camera) {
         adjustSurfaceViewSize(camera.getPreviewSize());
@@ -84,10 +79,11 @@ public class SurfaceViewFragment extends Fragment implements SurfaceHolder.Callb
     }
 
     /**
-     * 调整SurfaceView的大小比例 , 以避免预览变形
-     *
-     * @param previewSize 预览大小
-     */
+           * Adjust the size ratio of the SurfaceView to avoid preview distortion
+           *
+           * @param previewSize preview size
+           */
+
     private void adjustSurfaceViewSize(Size previewSize) {
         int width = getResources().getDisplayMetrics().widthPixels;
         int height = (int) (width * ((previewSize.getWidth() * 1.0f) / previewSize.getHeight()));

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.AppCompatSpinner;
@@ -24,7 +25,7 @@ import com.erlei.videorecorder.recorder.CameraController;
 
 import java.util.List;
 
-public class SettingsDialogFragment extends DialogFragment {
+public class SettingsDialogFragment extends BottomSheetDialogFragment {
 
     private CameraController mCameraController;
     private ArrayAdapter<Size> mResolutionAdapter;
@@ -83,7 +84,6 @@ public class SettingsDialogFragment extends DialogFragment {
         });
 
         Camera.Parameters cameraParameters = mCameraController.getCameraParameters();
-
 
         initSpinner(mSpFlash, cameraParameters.getSupportedFlashModes(), "flash-mode", new Callback() {
             @Override

@@ -221,9 +221,20 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
         tv_beauty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FilterDialogFragment filterDialogFragment =null;
 
-                BottomSheetDialogFragment bottomSheetDialogFragment = new BottomSheetFragment();
-                bottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), "Bottom Sheet Dialog Fragment");
+                if (filterDialogFragment != null && filterDialogFragment.isVisible()) {
+                    filterDialogFragment.dismiss();
+                    filterDialogFragment = null;
+                }
+                filterDialogFragment = FilterDialogFragment.newInstance();
+                filterDialogFragment.show(getChildFragmentManager(), SettingsDialogFragment.class.getName());
+
+
+
+
+//                BottomSheetDialogFragment bottomSheetDialogFragment = new BottomSheetFragment();
+//                bottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), "Bottom Sheet Dialog Fragment");
 
             }
         });
