@@ -75,8 +75,14 @@ public class FilterDialogFragment extends BottomSheetDialogFragment  implements 
         ArrayList<FilterModel> filterModels = new ArrayList<>();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        for (int i = 0; i < 8; i++) {
-            FilterModel category = new FilterModel("F "+(i+1), R.mipmap.header_icon_1);
+
+        Camera.Parameters cameraParameters = mCameraController.getCameraParameters();
+
+           cameraParameters.getSupportedWhiteBalance();
+
+
+        for (String  name  : cameraParameters.getSupportedWhiteBalance()) {
+            FilterModel category = new FilterModel(name, R.mipmap.header_icon_1);
             filterModels.add(category);
         }
         recyclerView.setAdapter(new FilterAdapter(filterModels, getActivity(),this ));
@@ -84,7 +90,7 @@ public class FilterDialogFragment extends BottomSheetDialogFragment  implements 
 
 
        // mResolutionAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, mCameraController.getSupportedPreviewSizes());
-        Camera.Parameters cameraParameters = mCameraController.getCameraParameters();
+      //  Camera.Parameters cameraParameters = mCameraController.getCameraParameters();
 
 
     }

@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.mikhaellopez.circularimageview.CircularImageView;
+
 import java.util.ArrayList;
 
 
@@ -75,7 +77,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView image;
+        CircularImageView image;
         TextView name;
 
         public ViewHolder(View itemView) {
