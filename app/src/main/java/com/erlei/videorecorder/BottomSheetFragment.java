@@ -46,7 +46,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements  F
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         for (int i = 0; i < 8; i++) {
-            FilterModel category = new FilterModel("F "+(i+1), R.mipmap.header_icon_1);
+            FilterModel category = new FilterModel("F "+(i+1),"dsf" , "fdyhd");
             filterModels.add(category);
         }
         recyclerView.setAdapter(new FilterAdapter(filterModels, getActivity(),this ));
@@ -65,7 +65,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements  F
 
 
     @Override
-    public void onItemClick(int item) {
+    public void onItemClick(String item , String type) {
 
       //  Camera.Parameters cameraParameters = mCameraController.getCameraParameters();
         Toast.makeText(getActivity(),item+" ",Toast.LENGTH_LONG).show();

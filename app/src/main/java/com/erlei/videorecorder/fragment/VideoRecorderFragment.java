@@ -101,7 +101,7 @@ public class VideoRecorderFragment extends Fragment implements SurfaceHolder.Cal
             if (output != null) {
                 Toast.makeText(getContext(), output, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getContext(), "录制失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Recording failed", Toast.LENGTH_SHORT).show();
             }
         }
     }

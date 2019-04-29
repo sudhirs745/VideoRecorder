@@ -2,32 +2,25 @@ package com.erlei.videorecorder;
 
 public class FilterModel {
 
-    String category_name;
-    int category_image;
+    String FilterName;
+    String FilterKey;
+    String FilterType;
 
-    public String getCategory_name() {
-        return category_name;
+    public FilterModel(String filterName, String filterKey, String filterType) {
+        FilterName = filterName;
+        FilterKey = filterKey;
+        FilterType = filterType;
     }
 
-    public void setCategory_name(String category_name) {
-        this.category_name = category_name;
+    public String getFilterName() {
+        return FilterName;
     }
 
-    public int getCategory_image() {
-        return category_image;
+    public String getFilterKey() {
+        return FilterKey;
     }
 
-    public void setCategory_image(int category_image) {
-        this.category_image = category_image;
-    }
-
-    public FilterModel(String category_name, int category_image) {
-        this.category_name = category_name;
-        this.category_image = category_image;
-    }
-
-    public FilterModel(String category_name) {
-        this.category_name = category_name;
-
+    public String getFilterType() {
+        return FilterType;
     }
 }

@@ -81,10 +81,22 @@ public class FilterDialogFragment extends BottomSheetDialogFragment  implements 
            cameraParameters.getSupportedWhiteBalance();
 
 
+        int i = 1;
         for (String  name  : cameraParameters.getSupportedWhiteBalance()) {
-            FilterModel category = new FilterModel(name, R.mipmap.header_icon_1);
-            filterModels.add(category);
+            FilterModel category = new FilterModel("F" +i,name,"F");
+            filterModels .add(category);
+            i++;
         }
+
+        int j = 1;
+        for (String  name  :  cameraParameters.getSupportedColorEffects()) {
+            FilterModel category = new FilterModel("C" +j,name,"C");
+            filterModels.add(category);
+            j++;
+        }
+
+
+
         recyclerView.setAdapter(new FilterAdapter(filterModels, getActivity(),this ));
 
 
@@ -150,11 +162,18 @@ public class FilterDialogFragment extends BottomSheetDialogFragment  implements 
 
 
     @Override
-    public void onItemClick(int item) {
+    public void onItemClick(String item, String type) {
         Toast.makeText(getActivity(),item+" ",Toast.LENGTH_LONG).show();
         Camera.Parameters cameraParameters = mCameraController.getCameraParameters();
       //  Log.e("f_res" , cameraParameters.get("cloudy-daylight") ) ;
-        mCameraController.setWhiteBalance(cameraParameters.getSupportedWhiteBalance().get(item));
+
+        if(type.equalsIgnoreCase("F")) {
+            mCameraController.setWhiteBalance(item);
+
+        }else if (type.equalsIgnoreCase("C")){
+            mCameraController.setColorEffects(item);
+        }
+
 
     }
 

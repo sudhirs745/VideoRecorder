@@ -572,7 +572,6 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
         Cursor cursor = loader.loadInBackground();
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
         cursor.moveToFirst();
-
         Log.e("url getAudioPath-- " ,cursor.getString(column_index));
         return cursor.getString(column_index);
     }

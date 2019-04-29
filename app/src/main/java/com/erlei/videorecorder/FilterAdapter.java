@@ -47,27 +47,27 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
         final FilterModel filterModel=filterModelArrayList.get(position);
 
 
-        holder.name.setText(filterModel.getCategory_name());
-        holder.image.setImageResource(filterModel.getCategory_image());
-        holder.image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                filterInterface.onItemClick(position);
-            }
-        });
+        holder.name.setText(filterModel.getFilterName());
+        holder.image.setImageResource(R.mipmap.header_icon_1);
+//        holder.image.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View v) {
+////                filterInterface.onItemClick(filterModel.getFilterKey());
+////            }
+////        });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                filterInterface.onItemClick(position);
+                filterInterface.onItemClick(filterModel.getFilterKey(),filterModel.getFilterType());
             }
         });
 
-        holder.image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
+//        holder.image.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//            }
+//        });
     }
 
     @Override

@@ -1,5 +1,5 @@
 package com.erlei.videorecorder;
 
 public interface FilterInterface {
-    void onItemClick(int item);
+    void onItemClick(String item,String type);
 }
