@@ -37,56 +37,56 @@ public class VideoRecorderHandler extends Handler implements MuxerCallback {
     }
 
     /**
-     * 停止捕捉音视频数据
-     *
-     * @param output 本次录制的视频文件路径
-     * @see VideoRecorderHandler#handleMediaCaptureStarted(java.lang.String)
-     */
+           * Stop capturing audio and video data
+           *
+           * @param output The video file path recorded this time
+           * @see VideoRecorderHandler#handleMediaCaptureStarted(java.lang.String)
+           */
     protected void handleMediaCaptureStopped(String output) {
 
     }
 
     /**
-     * 开始捕捉音视频数据
-     *
-     * @param output 本次录制的视频文件路径
-     * @see VideoRecorderHandler#handleMediaCaptureStopped(java.lang.String)
-     */
+           * Start capturing audio and video data
+           *
+           * @param output The video file path recorded this time
+           * @see VideoRecorderHandler#handleMediaCaptureStopped(java.lang.String)
+           */
     protected void handleMediaCaptureStarted(String output) {
 
     }
 
     /**
-     * 开始合并音视频编码数据
-     *
-     * @param output 本次录制的视频文件路径
-     *               <p>
-     *               注意 这个方法和 handleVideoMuxerStopped 并不总是成对的 , 有一种异常情况是
-     *               调用了startRecord 之后立刻调用 stopRecord ,会导致不会调用handleVideoMuxerStarted
-     *               这种情况是因为调用了startRecord 之后并不能立马开始混合音视频编码数据 ,
-     *               需要等待混合添加跟踪轨道之后才能开启开启混合器 , 所以如果在开始录制之后立即停止录制,
-     *               导致接收不到VideoRecorderHandler.MSG_MEDIA_MUXER_START
-     *               消息 , 导致没有调用 handleVideoMuxerStarted()
-     * @see VideoRecorderHandler#handleVideoMuxerStopped(java.lang.String)
-     */
+           * Start to merge audio and video encoded data
+           *
+           * @param output The video file path recorded this time
+           * <p>
+           * Note that this method and handleVideoMuxerStopped are not always paired. There is an exception.
+           * Calling stopRecord immediately after calling startRecord will cause handleVideoMuxerStarted not to be called
+           * This is because the audio and video encoded data cannot be started immediately after calling startRecord.
+           * You need to wait for the mix to add a track to open the mixer, so if you stop recording immediately after you start recording,
+           * Causes no VideoRecorderHandler.MSG_MEDIA_MUXER_START to be received
+           * message that caused no call to handleVideoMuxerStarted()
+           * @see VideoRecorderHandler#handleVideoMuxerStopped(java.lang.String)
+           */
     protected void handleVideoMuxerStarted(String output) {
 
     }
 
 
     /**
-     * 停止合并音视频编码数据
-     *
-     * @param output 本次录制的视频文件路径
-     *               <p>
-     *               注意 这个方法和 handleVideoMuxerStarted 并不总是成对的 , 有一种异常情况是
-     *               调用了startRecord 之后立刻调用 stopRecord ,会导致不会调用handleVideoMuxerStarted
-     *               这种情况是因为调用了startRecord 之后并不能立马开始混合音视频编码数据 ,
-     *               需要等待混合添加跟踪轨道之后才能开启开启混合器 , 所以如果在开始录制之后立即停止录制,
-     *               导致接收不到VideoRecorderHandler.MSG_MEDIA_MUXER_START
-     *               消息 , 导致没有调用 handleVideoMuxerStarted()
-     * @see VideoRecorderHandler#handleVideoMuxerStarted(java.lang.String)
-     */
+           * Stop combining audio and video encoded data
+           *
+           * @param output The video file path recorded this time
+           * <p>
+           * Note that this method and handleVideoMuxerStarted are not always paired. There is an exception.
+           * Calling stopRecord immediately after calling startRecord will cause handleVideoMuxerStarted not to be called
+           * This is because the audio and video encoded data cannot be started immediately after calling startRecord.
+           * You need to wait for the mix to add a track to open the mixer, so if you stop recording immediately after you start recording,
+           * Causes no VideoRecorderHandler.MSG_MEDIA_MUXER_START to be received
+           * message that caused no call to handleVideoMuxerStarted()
+           * @see VideoRecorderHandler#handleVideoMuxerStarted(java.lang.String)
+           */
     protected void handleVideoMuxerStopped(String output) {
 
     }

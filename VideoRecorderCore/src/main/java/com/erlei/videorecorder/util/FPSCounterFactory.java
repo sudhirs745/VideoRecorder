@@ -14,9 +14,9 @@ public class FPSCounterFactory {
     }
 
     /**
-     * 实时计算
-     * 使用上一帧的时间间隔进行计算
-     */
+           * Real-time calculation
+           * Calculated using the time interval of the previous frame
+           */
     public static class FPSCounter2 extends FPSCounter {
         private long lastFrame = System.nanoTime();
         private float FPS = 0;
@@ -35,9 +35,9 @@ public class FPSCounterFactory {
     }
 
     /**
-     * 精确采样
-     * 采样前N个帧，然后计算平均值
-     */
+           * Precise sampling
+           * N frames before sampling, then calculate the average
+           */
     public static class FPSCounter1 extends FPSCounter {
         ArrayList<Long> lst = new ArrayList<>();
         private long msPerFrame = 1;

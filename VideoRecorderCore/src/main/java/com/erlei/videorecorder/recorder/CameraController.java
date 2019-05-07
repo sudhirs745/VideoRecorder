@@ -33,7 +33,7 @@ public interface CameraController {
     void setZoomOnTouch(MotionEvent event);
 
     /**
-     * @return 相机是否打开
+     * @return Is the camera turned on?
      */
     boolean isOpen();
 
@@ -67,23 +67,23 @@ public interface CameraController {
     boolean isFront();
 
     /**
-     * 设置缩放 如果设备支持的话
-     * 最小值为0 ， 最大值为 getMaxZoom() ， 如果设置的值大于获取的最大值 ， 那么将设置为MaxZoom
-     *
-     * @param zoom 缩放级别
+     * Set zoom if the device supports it
+     *       * The minimum value is 0 and the maximum value is getMaxZoom() . If the value set is greater than the maximum value obtained, it will be set to MaxZoom.
+     *       *
+     *       * @param zoom zoom level
      */
     void setZoom(@IntRange(from = 0, to = Integer.MAX_VALUE) int zoom);
 
     /**
-     * 平滑缩放 如果设备支持的话
-     * 最小值为0 ， 最大值为 getMaxZoom() ， 如果设置的值大于获取的最大值 ， 那么将设置为MaxZoom
-     *
-     * @param zoom 缩放级别
+     *Smooth scaling if the device supports it
+     *       * The minimum value is 0 and the maximum value is getMaxZoom() . If the value set is greater than the maximum value obtained, it will be set to MaxZoom.
+     *       *
+     *       * @param zoom zoom level
      */
     void startSmoothZoom(@IntRange(from = 0, to = Integer.MAX_VALUE) int zoom);
 
     /**
-     * @param sceneModels 场景模式
+     * @param sceneModels Scene mode
      * @see android.hardware.Camera.Parameters#SCENE_MODE_ACTION
      * @see android.hardware.Camera.Parameters#SCENE_MODE_AUTO
      * @see android.hardware.Camera.Parameters#SCENE_MODE_BARCODE
@@ -105,7 +105,7 @@ public interface CameraController {
     void setSceneMode(@SceneModel String... sceneModels);
 
     /**
-     * @param colorEffects 设置色彩效果
+     * @param colorEffects Set color effects
      * @see android.hardware.Camera.Parameters#EFFECT_SEPIA
      * @see android.hardware.Camera.Parameters#EFFECT_AQUA
      * @see android.hardware.Camera.Parameters#EFFECT_BLACKBOARD
@@ -119,7 +119,7 @@ public interface CameraController {
     void setColorEffects(@ColorEffect String... colorEffects);
 
     /**
-     * @param focusModels 对焦模式
+     * @param focusModels Focus mode
      * @see android.hardware.Camera.Parameters#FOCUS_MODE_AUTO
      * @see android.hardware.Camera.Parameters#FOCUS_MODE_CONTINUOUS_VIDEO
      * @see android.hardware.Camera.Parameters#FOCUS_MODE_CONTINUOUS_PICTURE
@@ -131,9 +131,9 @@ public interface CameraController {
     void setFocusMode(@FocusModel String... focusModels);
 
     /**
-     * 设置防闪烁参数 ,(由于灯光频率(50HZ或者60HZ)影响的数字相机曝光，进而产生的条纹。)
+     * Set the anti-flicker parameter, (the stripe caused by the exposure of the digital camera affected by the light frequency (50HZ or 60HZ).)
      *
-     * @param antibanding 防闪烁值
+     * @param antibanding Anti-flicker value
      * @see android.hardware.Camera.Parameters#ANTIBANDING_50HZ
      * @see android.hardware.Camera.Parameters#ANTIBANDING_60HZ
      * @see android.hardware.Camera.Parameters#ANTIBANDING_AUTO
@@ -142,7 +142,7 @@ public interface CameraController {
     void setAntibanding(@Antibanding String... antibanding);
 
     /**
-     * @param flashModels 闪光灯模式
+     * @param flashModels Flash mode
      * @see android.hardware.Camera.Parameters#FLASH_MODE_AUTO
      * @see android.hardware.Camera.Parameters#FLASH_MODE_OFF
      * @see android.hardware.Camera.Parameters#FLASH_MODE_ON
@@ -152,63 +152,63 @@ public interface CameraController {
     void setFlashMode(@FlashModel String... flashModels);
 
     /**
-     * 是否是录制模式
-     *
-     * @param recording 录制模式
+     * Whether it is recording mode
+     *       *
+     *       * @param recording Recording mode
      * @see android.hardware.Camera.Parameters#setRecordingHint(boolean)
      */
     void setRecordingHint(boolean recording);
 
     /**
-     * 设置使用的摄像头朝向
-     *
-     * @param facing 摄像头朝向
+     * Set the camera orientation used
+     *       *
+     *       * @param facing camera orientation
      * @see android.hardware.Camera.CameraInfo#CAMERA_FACING_BACK
      * @see android.hardware.Camera.CameraInfo#CAMERA_FACING_FRONT
      */
     void setFacing(@Facing int facing);
 
     /**
-     * 设置比白平衡
-     *
-     * @param whiteBalance 白平衡
+     * Set the white balance
+     *       *
+     *       * @param whiteBalance white balance
      */
     void setWhiteBalance(@WhiteBalance String... whiteBalance);
 
     /**
-     * /**
-     * 设置曝光补偿
-     *
-     * @param compensation 曝光补偿
-     */
+           * /**
+           * Set exposure compensation
+           *
+           * @param compensation exposure compensation
+           */
     void setExposureCompensation(int compensation);
 
     /**
-     * 设置测光区域
-     *
-     * @param rect 测光区域列表
+     *Setting the metering area
+     *       *
+     *       * @param rect metering area list
      */
     void setMeteringAreas(Rect... rect);
 
     /**
-     * @return 获取支持的预览帧率区间
+     * @return Get supported preview frame rate interval
      */
     List<FpsRange> getSupportedPreviewFpsRange();
 
     /**
-     * 设置焦点
-     *
-     * @param rect 焦点区域列表
+     * Set focus
+     *       *
+     *       * @param rect focus area list
      */
     void setFocusAreas(Rect... rect);
 
     /**
-     * 切换摄像头朝向
+     * Switch camera orientation
      */
     void toggleFacing();
 
     /**
-     * 获取相机支持的模式,相机打开之后才能调用
+     * Get the mode supported by the camera, which can only be called after the camera is turned on.
      *
      * @param modes    modes
      */
@@ -216,7 +216,7 @@ public interface CameraController {
 
 
     /**
-     * 设置模式
+     * Setting mode
      * @param key key
      * @param value value
      */

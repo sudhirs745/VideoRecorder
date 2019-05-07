@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="min_space">5dp</dimen>
+    <dimen name="sign_in_title_txt_size">30dp</dimen>
+    <dimen name="username_txt_size">16dp</dimen>
+    <dimen name="gray_edittext_sixe">45dp</dimen>
+    <dimen name="domain">30dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="default_slider_height">36dp</dimen>
+    <dimen name="default_slider_margin">24dp</dimen>
+    <dimen name="default_slider_bar_height">4dp</dimen>
+    <dimen name="default_slider_handler_radius">10dp</dimen>
+    <dimen name="default_padding_side">24dp</dimen>
+    <dimen name="default_preview_height">40dp</dimen>
+    <dimen name="default_preview_image_height">36dp</dimen>
+    <dimen name="default_slider_margin_btw_title">20dp</dimen>
+
+
+    <dimen name="list_item_height">48dp</dimen>
+    <dimen name="horizontal_margin">16dp</dimen>
+    <dimen name="list_item_left_margin">72dp</dimen>
+
+    <dimen name="container_layout_margin">36dp</dimen>
+    <dimen name="btn_corners">6dp</dimen>
+    <dimen name="splash_btn_width">130dp</dimen>
+    <dimen name="divider_height1">2dp</dimen>
+    <dimen name="ic_nav_padding_start">16dp</dimen>
+    <dimen name="layout_in_between_margins">16dp</dimen>
+    <dimen name="divider_start_and_end_margins">8dp</dimen>
+    <dimen name="divider_top_and_bottom_margins">8dp</dimen>
+
+    <!-- Normal Spacing -->
+    <dimen name="label_idle_margin_top">20dp</dimen>
+    <dimen name="editTextLayout_padding_top">20dp</dimen>
+    <dimen name="bottom_marginTop">8dp</dimen>
+    <dimen name="edittext_text_size">18sp</dimen>
+    <dimen name="end_icon_min_width">40dp</dimen>
+    <dimen name="end_icon_min_height">40dp</dimen>
+    <dimen name="clear_button_min_width">40dp</dimen>
+    <dimen name="clear_button_min_height">40dp</dimen>
+
+    <!-- Dense Spacing -->
+    <dimen name="dense_label_idle_margin_top">16dp</dimen>
+    <dimen name="dense_editTextLayout_padding_top">16dp</dimen>
+    <dimen name="dense_bottom_marginTop">4dp</dimen>
+    <dimen name="dense_edittext_text_size">16sp</dimen>
+    <dimen name="dense_end_icon_min_width">38dp</dimen>
+    <dimen name="dense_end_icon_min_height">38dp</dimen>
+    <dimen name="dense_clear_button_min_width">38dp</dimen>
+    <dimen name="dense_clear_button_min_height">38dp</dimen>
+
+    <dimen name="label_text_size">18sp</dimen>
+    <dimen name="helper_text_size">12sp</dimen>
+    <dimen name="counter_text_size">12sp</dimen>
+    <dimen name="corner_radius">4dp</dimen>
+    <dimen name="label_active_margin_top">8dp</dimen>
+    <dimen name="upper_panel_paddingStart">16dp</dimen>
+    <dimen name="upper_panel_paddingEnd">16dp</dimen>
+    <dimen name="upper_panel_paddingEnd_small">8dp</dimen>
+    <dimen name="upper_panel_paddingBottom">5dp</dimen>
+    <dimen name="editTextLayout_padding_bottom">8dp</dimen>
+    <dimen name="helper_marginEnd">8dp</dimen>
+    <dimen name="bottom_line_height">1dp</dimen>
+    <dimen name="label_space_height">8dp</dimen>
+    <dimen name="icon_signifier_width">24dp</dimen>
+    <dimen name="icon_signifier_height">24dp</dimen>
+    <dimen name="icon_signifier_marginEnd">16dp</dimen>
+    <dimen name="icon_signifier_marginTop">20dp</dimen>
+
+    <dimen name="common_zero_dp">0dp</dimen>
+    <dimen name="default_video_view_time_text_size">15sp</dimen>
+    <dimen name="video_view_controller_margin">10dp</dimen>
+    <dimen name="video_view_center_info_txt_size">18sp</dimen>
+    <dimen name="top_fragment_height">200dip</dimen>
+    <dimen name="top_fragment_margin">10dip</dimen>
+    <dimen name="place_renderer_height">200dip</dimen>
+    <dimen name="tv_show_fan_art_height">150dip</dimen>
+    <dimen name="button_title_padding_left_right">10dip</dimen>
+    <dimen name="button_title_text_size">18sp</dimen>
+    <dimen name="button_title_margin_top">10dip</dimen>
+    <item name="x_scale_factor" format="float" type="dimen">2.3</item>
+    <item name="y_scale_factor" format="float" type="dimen">2.3</item>
+    <dimen name="grid_view_vertical_spacing">10dip</dimen>
+    <dimen name="grid_view_horizontal_spacing">10dip</dimen>
+    <dimen name="grid_view_margin">10dip</dimen>
+    <dimen name="divider_height">1dip</dimen>
+    <dimen name="episodes_header_padding">10dip</dimen>
+    <dimen name="episodes_header_padding_left">16dip</dimen>
+    <dimen name="episode_padding_left_right">6dip</dimen>
+    <dimen name="episode_number">38sp</dimen>
+    <dimen name="episode_title">20sp</dimen>
+    <dimen name="episode_title_margin_top">6dip</dimen>
+    <dimen name="episode_title_margin_left">8dip</dimen>
+    <dimen name="episode_publish_date_margin_left">8dip</dimen>
+    <dimen name="episode_publish_date_margin_bottom">2dip</dimen>
+    <dimen name="place_title_margin">5dip</dimen>
+    <dimen name="tv_show_title_margin_left_top">5dip</dimen>
+    <dimen name="tv_show_margin_left">5dip</dimen>
+    <dimen name="tv_show_margin_bottom">10dip</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+
+</resources>

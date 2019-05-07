@@ -16,5 +16,5 @@ import java.lang.annotation.RetentionPolicy;
         Camera.Parameters.WHITE_BALANCE_TWILIGHT,
         Camera.Parameters.WHITE_BALANCE_WARM_FLUORESCENT})
 @Retention(RetentionPolicy.SOURCE)
-public @interface WhiteBalance {
+public @interface   WhiteBalance {
 }

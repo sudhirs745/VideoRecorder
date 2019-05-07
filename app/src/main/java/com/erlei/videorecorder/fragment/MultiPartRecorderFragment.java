@@ -91,6 +91,136 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
         mBtnRecord = view.findViewById(R.id.cbRecord);
         mTvFps = view.findViewById(R.id.tvFps);
         addSound= view.findViewById(R.id.add_sound);
+
+        final TextView x01=view.findViewById(R.id.x_01);
+        final TextView x05=view.findViewById(R.id.x_05);
+        final TextView x1=view.findViewById(R.id.x_1);
+        final TextView x2=view.findViewById(R.id.x_2);
+        final TextView x3=view.findViewById(R.id.x_3);
+
+        x01.setBackgroundResource(R.drawable.round_shape_text_1);
+        x01.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+        x05.setBackgroundResource(R.drawable.round_shape_text_1);
+        x05.setTextColor(Color.parseColor("#000000"));
+
+        x1.setBackgroundResource(R.drawable.round_shape_text);
+        x1.setTextColor(Color.parseColor("#000000"));
+
+        x2.setBackgroundResource(R.drawable.round_shape_text_1);
+        x2.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+        x3.setBackgroundResource(R.drawable.round_shape_text_1);
+        x3.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+        x01.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //#000000
+                x01.setBackgroundResource(R.drawable.round_shape_text);
+                x01.setTextColor(Color.parseColor("#000000"));
+
+                x05.setBackgroundResource(R.drawable.round_shape_text_1);
+                x05.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+                x1.setBackgroundResource(R.drawable.round_shape_text_1);
+                x1.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+                x2.setBackgroundResource(R.drawable.round_shape_text_1);
+                x2.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+                x3.setBackgroundResource(R.drawable.round_shape_text_1);
+                x3.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+
+            }
+        });
+
+        x05.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                x01.setBackgroundResource(R.drawable.round_shape_text_1);
+                x01.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+                x05.setBackgroundResource(R.drawable.round_shape_text);
+                x05.setTextColor(Color.parseColor("#000000"));
+
+                x1.setBackgroundResource(R.drawable.round_shape_text_1);
+                x1.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+                x2.setBackgroundResource(R.drawable.round_shape_text_1);
+                x2.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+                x3.setBackgroundResource(R.drawable.round_shape_text_1);
+                x3.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+            }
+        });
+        x1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                x01.setBackgroundResource(R.drawable.round_shape_text_1);
+                x01.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+                x05.setBackgroundResource(R.drawable.round_shape_text_1);
+                x05.setTextColor(Color.parseColor("#000000"));
+
+                x1.setBackgroundResource(R.drawable.round_shape_text);
+                x1.setTextColor(Color.parseColor("#000000"));
+
+                x2.setBackgroundResource(R.drawable.round_shape_text_1);
+                x2.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+                x3.setBackgroundResource(R.drawable.round_shape_text_1);
+                x3.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+            }
+        });
+        x2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                x01.setBackgroundResource(R.drawable.round_shape_text_1);
+                x01.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+                x05.setBackgroundResource(R.drawable.round_shape_text_1);
+                x05.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+                x1.setBackgroundResource(R.drawable.round_shape_text_1);
+                x1.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+                x2.setBackgroundResource(R.drawable.round_shape_text);
+                x2.setTextColor(Color.parseColor("#000000"));
+
+                x3.setBackgroundResource(R.drawable.round_shape_text_1);
+                x3.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+            }
+        });
+        x3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                x01.setBackgroundResource(R.drawable.round_shape_text_1);
+                x01.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+                x05.setBackgroundResource(R.drawable.round_shape_text_1);
+                x05.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+                x1.setBackgroundResource(R.drawable.round_shape_text_1);
+                x1.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+                x2.setBackgroundResource(R.drawable.round_shape_text_1);
+                x2.setTextColor(Color.parseColor("#E4B4AFAF"));
+
+                x3.setBackgroundResource(R.drawable.round_shape_text);
+                x3.setTextColor(Color.parseColor("#000000"));
+
+            }
+        });
+
         mRecorderIndicator = view.findViewById(R.id.recorderIndicator);
         mRecorderIndicator.setMaxDuration(60 * 3);
         mRecorderIndicator.setRecordListener(new MultiPartRecorderView.RecordListener() {
@@ -216,6 +346,18 @@ public class MultiPartRecorderFragment extends Fragment implements SettingsDialo
 
             }
         });
+        TextView tv_timer = view.findViewById(R.id.tv_timer);
+        tv_timer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                BottomSheetDialogFragment bottomSheetDialogFragment = new TimerSheetFragment();
+                bottomSheetDialogFragment.show(getActivity().getSupportFragmentManager(), "Bottom Sheet Dialog Fragment");
+
+            }
+        });
+
+
 
         TextView tv_beauty = view.findViewById(R.id.tv_beauty);
         tv_beauty.setOnClickListener(new View.OnClickListener() {

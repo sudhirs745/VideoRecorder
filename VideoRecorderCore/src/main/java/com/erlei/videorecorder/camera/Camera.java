@@ -48,6 +48,7 @@ public class Camera {
     /**
      * android.hardware.Camera#getNumberOfCameras() == 0
      */
+
     public static final int NO_CAMERA = 1;
     /**
      * CameraBuilder == null , Should not happen
@@ -276,7 +277,7 @@ public class Camera {
             log("requestPictureSize ：" + mBuilder.mPictureSize.toString() + "\t\t pictureSize : " + getPictureSize().toString());
             cameraParameters.setPictureSize(mPictureSize.width, mPictureSize.height);
         }
-        //拍照的图片缩放
+        //Photo zoom
         setZoom(cameraParameters, mBuilder.mZoom);
 
 
@@ -333,7 +334,7 @@ public class Camera {
     }
 
     /**
-     * 切换闪光灯状态
+     * Switch flash status
      */
     public synchronized void toggleFlash() {
         if (mCamera == null) return;
@@ -341,21 +342,21 @@ public class Camera {
             android.hardware.Camera.Parameters parameters = getParameters();
             if (parameters == null) return;
             if (flashIsOpen()) {
-                //打开状态 - 需要关闭
+                //Open state - need to close
                 parameters.setFlashMode(android.hardware.Camera.Parameters.FLASH_MODE_OFF);
             } else {
-                //关闭状态 - 需要打开
+                //Closed state - need to open
                 parameters.setFlashMode(android.hardware.Camera.Parameters.FLASH_MODE_TORCH);
             }
             mCamera.setParameters(parameters);
         } catch (Exception e) {
             e.printStackTrace();
-            loge("切换闪光灯失败");
+            loge("Switch flash failed");
         }
     }
 
     /**
-     * @return 闪光灯是否开启
+     * @return Is the flash turned on?
      */
     public boolean flashIsOpen() {
         android.hardware.Camera.Parameters parameters = getParameters();
@@ -363,7 +364,7 @@ public class Camera {
     }
 
     /**
-     * 切换摄像头朝向
+     * Switch camera orientation
      */
     public synchronized void toggleFacing() {
         if (mCamera == null) return;
@@ -376,7 +377,7 @@ public class Camera {
     }
 
     /**
-     * @return 获取当前摄像头的朝向
+     * @return Get the current camera orientation
      */
     public int getFacing() {
         if (mCamera == null) return -1;
@@ -403,10 +404,10 @@ public class Camera {
 
 
     /**
-     * 设置焦点
-     *
-     * @param rect 焦点区域
-     */
+           * Set focus
+           *
+           * @param rect focus area
+           */
     public void setFocusAreas(Rect... rect) {
         if (mCamera == null || rect == null || rect.length == 0) return;
         final android.hardware.Camera.Parameters parameters = getParameters();
@@ -428,7 +429,7 @@ public class Camera {
             mCamera.autoFocus(new android.hardware.Camera.AutoFocusCallback() {
                 @Override
                 public void onAutoFocus(boolean b, android.hardware.Camera camera) {
-                    //不能用上面的 . 如果对焦的这一段时间参数有更改 , 会丢失
+                    //Cannot use the above. If the parameter of the focus has changed during this time, it will be lost.
                     android.hardware.Camera.Parameters cameraParameters = camera.getParameters();
                     cameraParameters.setFocusMode(currentFocusMode);
                     camera.setParameters(cameraParameters);
@@ -479,7 +480,7 @@ public class Camera {
     }
 
     /**
-     * 必须成功打开相机之后才有正确的返回结果
+     * The camera must be successfully turned on before the correct return result
      *
      * @return android.hardware.Camera.Parameters
      */
@@ -490,11 +491,11 @@ public class Camera {
     }
 
     /**
-     * 开启相机预览
+     * Turn on camera preview
      */
     private synchronized void startPreview() {
         if (mCamera == null) {
-            handleCameraCallback(UNKNOWN, "未知错误");
+            handleCameraCallback(UNKNOWN, "unknown mistake");
             return;
         }
         try {
@@ -528,12 +529,12 @@ public class Camera {
     }
 
     /**
-     * 根据屏幕当前角度计算Camera正确显示所需要的角度
-     *
-     * @param rotation 屏幕角度
-     * @return CameraDisplayOrientation
-     * @see android.view.Display#getRotation()
-     */
+           * Calculate the angle required for Camera to display correctly according to the current angle of the screen
+           *
+           * @param rotation screen angle
+           * @return CameraDisplayOrientation
+           * @see android.view.Display#getRotation()
+           */
     private int getCameraDisplayOrientation(int rotation) {
         android.hardware.Camera.CameraInfo info = getCameraInfo(mCameraId);
         mCameraOrientation = info.orientation;
@@ -579,14 +580,14 @@ public class Camera {
     }
 
     /**
-     * @param tag                   日志前綴
-     * @param supportedPreviewSizes 设备支持的预览尺寸
-     * @param request               请求的预览尺寸
-     * @return 在设备支持的尺寸中 ， 根据请求的尺寸来寻找一个合适的预览尺寸 ，
-     * 如果请求的尺寸是设备支持的 ， 那么直接返回该尺寸 ，否则根据指定的宽高来寻找最接近的尺寸
-     */
+           * @param tag log prefix
+           * @param supportedPreviewSizes preview size supported by the device
+           * @param request request preview size
+           * @return Find the appropriate preview size based on the requested size in the size supported by the device.
+           * If the requested size is supported by the device, return the size directly, otherwise find the closest size according to the specified width and height.
+           */
     private android.hardware.Camera.Size getOptimalSize(String tag, List<android.hardware.Camera.Size> supportedPreviewSizes, Size request) {
-        //排序
+
         Collections.sort(supportedPreviewSizes, new Comparator<android.hardware.Camera.Size>() {
             //            @Override
 //            public int compare(android.hardware.Camera.Size o1, android.hardware.Camera.Size o2) {
@@ -602,7 +603,7 @@ public class Camera {
                 log(tag + "\t\twidth :" + size.width + "\t height :" + size.height + "\t ratio : " + ((float) size.width / (float) size.height));
             }
         }
-        //如果设备支持请求的尺寸
+        //If the device supports the requested size
         for (android.hardware.Camera.Size size : supportedPreviewSizes) {
             if (request.equals(size)) return size;
         }
@@ -611,7 +612,7 @@ public class Camera {
             if (size.width >= request.width && size.height >= request.height) return size;
         }
 
-        //最终还没找到 , 使用最大的
+        //I haven't found it yet, I use the biggest one.
         return Collections.max(supportedPreviewSizes, new Comparator<android.hardware.Camera.Size>() {
             @Override
             public int compare(android.hardware.Camera.Size pre, android.hardware.Camera.Size after) {
@@ -691,12 +692,12 @@ public class Camera {
                 mCamera.setParameters(parameters);
             }
         } else {
-            loge("设置测光区域失败");
+            loge("Setting the metering area failed");
         }
     }
 
     /**
-     * 设置曝光补偿
+     *
      *
      * @param compensation compensation <= maxExposureCompensation && compensation >= minExposureCompensation
      * @see android.hardware.Camera.Parameters#getMaxExposureCompensation()
@@ -817,10 +818,10 @@ public class Camera {
         if (cameraId == -1) return new ArrayList<>();
         ArrayList<String> supportedModes = getMemoryCachedSupportedModes(cameraId, modes);
         if (supportedModes == null) {
-            //内存没取到 ，从 SharedPreferences 取
+            //The memory is not fetched, taken from SharedPreferences
             supportedModes = getFileCachedSupportedModes(cameraId, modes);
             if (supportedModes == null) {
-                //文件没取到 ， 从Camera取
+                //The file was not taken, taken from Camera
                 supportedModes = getSupportedModesFromCamera(modes);
             }
         }
@@ -867,7 +868,7 @@ public class Camera {
     public ArrayList<String> getMemoryCachedSupportedModes(int cameraId, String... modes) {
         if (mSupportedModes.size() > 0) {
             ArrayList<String> supportedModes = new ArrayList<>();
-            //缓存有数据
+            //Cache with data
             HashMap<String, String> map = mSupportedModes.get(cameraId);
             for (String mode : modes) {
                 String value = map.get(mode);
@@ -957,11 +958,11 @@ public class Camera {
         }
 
         /**
-         * 设置缩放 如果设备支持的话
-         * 最小值为0 ， 最大值为 getMaxZoom() ， 如果设置的值大于获取的最大值 ， 那么将设置为MaxZoom
-         *
-         * @param zoom 缩放级别
-         */
+                   * Set zoom if the device supports it
+                   * The minimum value is 0 and the maximum value is getMaxZoom() . If the value set is greater than the maximum value obtained, it will be set to MaxZoom.
+                   *
+                   * @param zoom zoom level
+                   */
         public CameraBuilder setZoom(@IntRange(from = 0, to = Integer.MAX_VALUE) int zoom) {
             mZoom = zoom;
             return this;
@@ -973,7 +974,7 @@ public class Camera {
         }
 
         /**
-         * @param size 图片大小
+         * @param size size of picture
          */
         public CameraBuilder setPictureSize(@NonNull Size size) {
             mPictureSize = size;
@@ -1083,9 +1084,10 @@ public class Camera {
         }
 
         /**
-         * 设置防闪烁参数 ,(由于灯光频率(50HZ或者60HZ)影响的数字相机曝光，进而产生的条纹。)
+         * Set the anti-flicker parameter, (the stripe caused by the exposure of the digital camera affected by the light frequency (50HZ or 60HZ).)
+         *           *
+         *           * @param antibanding anti-flicker value
          *
-         * @param antibanding 防闪烁值
          * @see android.hardware.Camera.Parameters#ANTIBANDING_50HZ
          * @see android.hardware.Camera.Parameters#ANTIBANDING_60HZ
          * @see android.hardware.Camera.Parameters#ANTIBANDING_AUTO
@@ -1140,7 +1142,7 @@ public class Camera {
         }
 
         /**
-         * 设置使用 surfaceTexture 预览
+         * Set to use surfaceTexture preview
          */
         public CameraBuilder setSurfaceTexture(@NonNull SurfaceTexture surfaceTexture) {
             mSurfaceTexture = surfaceTexture;
@@ -1148,7 +1150,7 @@ public class Camera {
         }
 
         /**
-         * 添加相机预览尺寸选择器
+         * Add camera preview size selector
          */
         public CameraBuilder setPreviewSizeSelector(SizeSelector sizeSelector) {
             mPreviewSizeSelector = sizeSelector;
@@ -1212,24 +1214,24 @@ public class Camera {
 
     public interface SizeSelector {
         /**
-         * 选择合适的尺寸
-         *
-         * @param supportedSizes 支持的尺寸列表
-         * @param requestSize    期望的尺寸
-         * @return 最终的尺寸
-         */
+                   * Choose the right size
+                   *
+                   * @param supportedSizes List of supported sizes
+                   * @param requestSize expected size
+                   * @return final size
+                   */
         android.hardware.Camera.Size select(List<android.hardware.Camera.Size> supportedSizes, Size requestSize);
     }
 
     public interface CameraCallback {
         /**
-         * 打开相机成功
-         * 如果使用的是 SurfaceView预览 , 可以在这个回调里根据camera.getPreviewSize() 重新调整SurfaceView的大小比例 ， 避免预览变形
-         */
+                   * Turn on the camera successfully
+                   * If you are using SurfaceView preview, you can resize the SurfaceView according to camera.getPreviewSize() in this callback to avoid preview distortion.
+                   */
         void onSuccess(Camera camera);
 
         /**
-         * 相机预览失败回调
+         * Camera preview failure callback
          *
          * @see Camera#NO_CAMERA
          * @see Camera#NOT_CONFIGURED

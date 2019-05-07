@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <SurfaceView
             android:id="@+id/SurfaceView"
             android:layout_width="match_parent"
@@ -113,6 +112,7 @@
                 android:gravity="center"
                 />
             <TextView
+                android:id="@+id/tv_timer"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:drawableTop="@mipmap/timers"
@@ -139,26 +139,31 @@
             android:layout_marginBottom="130dp"
             android:orientation="horizontal">
             <TextView
+                android:id="@+id/x_01"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="6dp"
+                android:background="@drawable/round_shape_text_1"
                 android:gravity="center"
                 android:textColor="#E4B4AFAF"
                 android:text="0.1X"
 
                  />
             <TextView
+                android:id="@+id/x_05"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="6dp"
                 android:gravity="center"
+                android:background="@drawable/round_shape_text_1"
                 android:textColor="#E4B4AFAF"
                 android:text="0.5X"
 
                 />
             <TextView
+                android:id="@+id/x_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -168,21 +173,25 @@
                 android:text="1X"
                 />
             <TextView
+                android:id="@+id/x_2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="6dp"
                 android:gravity="center"
+                android:background="@drawable/round_shape_text_1"
                 android:textColor="#E4B4AFAF"
                 android:text="2X"
 
                 />
             <TextView
+                android:id="@+id/x_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:padding="6dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:background="@drawable/round_shape_text_1"
                 android:textColor="#E4B4AFAF"
                 android:text="3X"
 

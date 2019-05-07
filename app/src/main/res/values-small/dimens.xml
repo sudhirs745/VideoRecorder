@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="sign_in_title_txt_size">22dp</dimen>
+    <dimen name="username_txt_size">15dp</dimen>
+    <dimen name="gray_edittext_sixe">35.5dp</dimen>
+</resources>

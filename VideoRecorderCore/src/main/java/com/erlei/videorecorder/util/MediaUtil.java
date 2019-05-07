@@ -6,10 +6,7 @@ import android.media.MediaMetadataRetriever;
 import android.text.TextUtils;
 import android.util.Log;
 
-/**
- * Created by lll on 2017/12/7.
- * 视频工具类
- */
+
 public class MediaUtil {
 
     private static final String TAG = "MediaUtil";
@@ -53,7 +50,7 @@ public class MediaUtil {
             mediaInfo.setHasVideo(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_HAS_VIDEO));
             mediaInfo.setMimeType(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_MIMETYPE));
             mediaInfo.setLocation(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_LOCATION));
-//            //这种方式获取的信息不准确
+//            //The information obtained in this way is not accurate
 //            mediaInfo.setHeight(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT));
 //            mediaInfo.setWidth(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH));
             Bitmap bitmap = mmr.getFrameAtTime();
@@ -77,7 +74,7 @@ public class MediaUtil {
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
-            Bitmap bitmap = BitmapFactory.decodeFile(path, options); // 此时返回的bitmap为null
+            Bitmap bitmap = BitmapFactory.decodeFile(path, options); // The bitmap returned at this time is null
             return new int[]{options.outWidth, options.outHeight};
         } catch (Exception e) {
             e.printStackTrace();
@@ -169,7 +166,7 @@ public class MediaUtil {
         }
 
         /**
-         * @return 长的那一边永远是 宽 , 明明是
+         * @return The long side is always wide, obviously
          */
         public float getWidth() {
             try {

@@ -239,11 +239,11 @@ public class DefaultCameraController implements CameraController {
     }
 
     /**
-     * 设置缩放 如果设备支持的话
-     * 最小值为0 ， 最大值为 getMaxZoom() ， 如果设置的值大于获取的最大值 ， 那么将设置为MaxZoom
-     *
-     * @param zoom 缩放级别
-     */
+           * Set zoom if the device supports it
+           * The minimum value is 0 and the maximum value is getMaxZoom() . If the value set is greater than the maximum value obtained, it will be set to MaxZoom.
+           *
+           * @param zoom zoom level
+           */
     @Override
     public void setZoom(int zoom) {
         checkCameraState();
@@ -251,11 +251,11 @@ public class DefaultCameraController implements CameraController {
     }
 
     /**
-     * 平滑缩放 如果设备支持的话
-     * 最小值为0 ， 最大值为 getMaxZoom() ， 如果设置的值大于获取的最大值 ， 那么将设置为MaxZoom
-     *
-     * @param zoom 缩放级别
-     */
+           * Smooth zoom if the device supports it
+           * The minimum value is 0 and the maximum value is getMaxZoom() . If the value set is greater than the maximum value obtained, it will be set to MaxZoom.
+           *
+           * @param zoom zoom level
+           */
     @Override
     public void startSmoothZoom(int zoom) {
         checkCameraState();
@@ -267,10 +267,10 @@ public class DefaultCameraController implements CameraController {
             int target = clamp(zoom, 0, maxZoom);
             if (zoom == currentZoom) return;
             if (cameraParameters.isSmoothZoomSupported()) {
-                //支持平滑缩放
+                //Support for smooth scaling
                 mCamera.smoothZoom(zoom);
             } else {
-                //不支持平滑缩放,使用兼容模式
+                //Smooth scaling is not supported, use compatibility mode
                 stopSmoothZoom();
                 mSmoothZoomAnimator = ValueAnimator.ofInt(currentZoom, target);
                 mSmoothZoomAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

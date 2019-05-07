@@ -5,10 +5,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-/**
- * Created by lll on 2018/1/20.
- * 使用重力传感器监听屏幕方向
- */
+
 public class SensorAccelerometer implements SensorEventListener {
 
     private final OrientationChangeListener mListener;
@@ -33,7 +30,7 @@ public class SensorAccelerometer implements SensorEventListener {
         if (event.sensor.getType() == android.hardware.Sensor.TYPE_ACCELEROMETER) {
             int x = (int) event.values[0];
             int y = (int) event.values[1];
-            if (Math.abs(x) > 6) {// 倾斜度超过60度 10*1.732/2
+            if (Math.abs(x) > 6) {// Inclined more than 60 degrees 10*1.732/2
                 if (x <= -3)
                     mListener.onChange(0);
                 else

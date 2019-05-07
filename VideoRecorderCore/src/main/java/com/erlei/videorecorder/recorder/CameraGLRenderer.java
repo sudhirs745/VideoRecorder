@@ -18,22 +18,22 @@ import static com.erlei.videorecorder.gles.GLUtil.checkGlError;
 import static com.erlei.videorecorder.gles.GLUtil.checkLocation;
 
 /**
- * Created by lll on 2018/5/23
- * Email : lllemail@foxmail.com
- * Describe : 将相机预览帧数据渲染到 GLCameraView 上
- * <p>
- * 创建了三个纹理
- * <p>
- * 1 . mTexCamera[0] oes 纹理 , 相机帧数据会输出到绑定这个纹理的 SurfaceTexture
- * 2 . mTexFBO[0]   2d 纹理,
- * 3 . mTexDraw[0]  2d 纹理,
- * <p>
- * 创建了一个帧缓冲 mFBO[0] , CameraGlView 有 getCameraTextureCallback 会使用这个fbo
- * 先将相机纹理数据绘制到这个帧缓冲区里面 ,然后调用 drawTexture
- * 会传递两个纹理id , 回调方法需要将修改后的纹理数据从 mTexFBO[0] 转到 mTexDraw[0]
- * 根据回调方法的返回值决定将mTexFBO[0] 或 mTexDraw[0] 纹理的数据绘制到屏幕
- * <p>
- */
+   * Created by sudhir on 2019/4/30
+   * Email : sudhirs745@gmail.com
+   * Describe : Render camera preview frame data to GLCameraView
+   *
+   * Created three textures
+   *
+   * 1 . mTexCamera[0] oes texture , camera frame data will be output to the SurfaceTexture bound to this texture
+   * 2 . mTexFBO[0] 2d texture,
+   * 3 . mTexDraw[0] 2d texture,
+   *
+   * Create a framebuffer mFBO[0] , CameraGlView has getCameraTextureCallback will use this fbo
+   * First draw the camera texture data into this frame buffer, then call drawTexture
+   * will pass two texture id, the callback method needs to transfer the modified texture data from mTexFBO[0] to mTexDraw[0]
+   * Decide to draw data from the mTexFBO[0] or mTexDraw[0] texture to the screen based on the return value of the callback method
+   *
+   */
 class CameraGLRenderer {
     private static final String TAG = "CameraGLRenderer";
 

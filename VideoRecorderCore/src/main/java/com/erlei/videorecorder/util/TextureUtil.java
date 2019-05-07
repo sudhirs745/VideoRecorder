@@ -5,11 +5,7 @@ import android.support.annotation.IntDef;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/**
- * Created by lll on 2018/5/10
- * Email : lllemail@foxmail.com
- * Describe : 纹理矩阵工具类
- */
+
 public class TextureUtil {
 
     public static final int ROTATION_0 = 0;
