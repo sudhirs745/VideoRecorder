@@ -6,38 +6,11 @@
     android:layout_height="match_parent"
     android:weightSum="1"
     android:orientation="vertical"
-
     >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/px_55.0_dp"
-        android:background="@drawable/edittext_gey_corner_1"
-        >
-
-        <ImageView
-            android:id="@+id/im_back"
-            android:layout_width="@dimen/px_30.0_dp"
-            android:layout_height="@dimen/px_30.0_dp"
-            android:layout_margin="@dimen/px_10.0_dp"
-            app:srcCompat="@drawable/ic_arrow_back_black"
-            />
-
-        <TextView
-            android:id="@+id/tv_post"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/px_69.0_dp"
-            android:layout_margin="@dimen/px_10.0_dp"
-            android:text="Post"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="@dimen/px_20.0_dp" />
-
-    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/px_150.0_dp"
+        android:layout_height="@dimen/px_220.0_dp"
         >
 
         <EditText
@@ -51,7 +24,6 @@
             android:padding="@dimen/px_10.0_dp"
             android:maxLength="100"
             android:background="@null"
-
             android:gravity="start"
             android:textSize="@dimen/px_15.0_dp" />
 
@@ -60,23 +32,21 @@
             android:layout_alignBottom="@+id/tv_describe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="# Hashtags"
+            android:text="Hashtags"
             android:textSize="@dimen/px_16.0_dp"
             android:layout_marginLeft="@dimen/px_10.0_dp"
             android:padding="@dimen/px_10.0_dp"
             android:textAllCaps="false" />
 
         <ImageView
-            android:layout_width="@dimen/px_150.0_dp"
-            android:layout_height="@dimen/px_150.0_dp"
+            android:id="@+id/thum_image"
+            android:layout_width="@dimen/px_180.0_dp"
+            android:layout_height="@dimen/px_200.0_dp"
             android:layout_toRightOf="@id/tv_describe"
             android:layout_marginTop="@dimen/px_10.0_dp"
             android:layout_marginRight="@dimen/px_10.0_dp"
-
             android:scaleType="fitXY"
             android:src="@mipmap/header_icon_2" />
-
-
     </RelativeLayout>
 
 
@@ -87,7 +57,7 @@
         android:background="#AAAAAA"
         android:layout_marginTop="@dimen/px_5.0_dp"
         android:layout_marginRight="@dimen/px_10.0_dp"
-        android:layout_marginLeft="@dimen/px_10.0_dp"        />
+        android:layout_marginLeft="@dimen/px_10.0_dp"  />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -97,14 +67,30 @@
         android:visibility="gone"
         >
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_hashtag"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:nestedScrollingEnabled="true"
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
-            />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/filter_dialog_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:paddingRight="1dp"
+                />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#000000"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/filter_value_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -117,8 +103,6 @@
         android:orientation="vertical"
 
         >
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -139,13 +123,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/px_10.0_dp"
                 android:text="Who can view my video"
-
                 android:textColor="#000000"
                 android:textSize="@dimen/px_16.0_dp"
                 android:drawableRight="@drawable/ic_chevron_right_black_24dp"
                 />
-
-
 
         </LinearLayout>
 
@@ -167,7 +148,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/px_10.0_dp"
                 android:text="Comments Off"
-
                 android:textColor="#000"
                 android:textSize="@dimen/px_16.0_dp"
                 />

@@ -11,12 +11,13 @@ import android.widget.VideoView;
 
 public class VideoPlayer extends AppCompatActivity {
 
+    String  image_or_video_path;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
 
-      final String  image_or_video_path=getIntent().getStringExtra("file_path");
+        image_or_video_path=getIntent().getStringExtra("file_path");
         Log.e("video_come",image_or_video_path +" ");
 
         VideoView videoView = findViewById(R.id.VideoView);
@@ -50,9 +51,9 @@ public class VideoPlayer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-              Intent intent = new Intent(VideoPlayer.this, PoastActivity.class);
+                Intent intent = new Intent(VideoPlayer.this, PoastActivity.class);
                 intent.putExtra("file_path",image_or_video_path);
-                startActivity(new Intent(VideoPlayer.this, PoastActivity.class));
+                startActivity(intent);
                 finish();
             }
         });
