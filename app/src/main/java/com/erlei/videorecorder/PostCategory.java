@@ -41,6 +41,31 @@ public class PostCategory extends AppCompatActivity {
             "http://api.learn2crack.com/android/images/marshmallow.png"
     };
 
+    private final String colorbg[] = {
+            "#e06377",
+            "#e3eaa7",
+            "#b5e7a0",
+            "#86af49",
+            "#b2b2b2",
+            "#f18973",
+            "#bc5a45",
+            "#c5d5c5",
+            "#e3e0cc",
+            "#d9ecd0"
+    };
+
+    private final String colorText[] = {
+            "#FFFFFF",
+            "#FFFFFF",
+            "#FFFFFF",
+            "#FFFFFF",
+            "#FFFFFF",
+            "#FFFFFF",
+            "#FFFFFF",
+            "#FFFFFF",
+            "#FFFFFF",
+            "#FFFFFF"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +89,7 @@ public class PostCategory extends AppCompatActivity {
 
         ArrayList<CategoryModelPost> categoryModelPostArrayList = new ArrayList<>();
         for(int i=0;i<android_version_names.length;i++){
-            CategoryModelPost  categoryModelPost = new CategoryModelPost(i+"",android_version_names[i],android_image_urls[i]);
+            CategoryModelPost  categoryModelPost = new CategoryModelPost(i+"",android_version_names[i],android_image_urls[i], colorbg[i],colorText[i]);
 
             categoryModelPostArrayList.add(categoryModelPost);
         }

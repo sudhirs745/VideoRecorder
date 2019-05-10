@@ -1,6 +1,8 @@
 package com.erlei.videorecorder.categoryHashtag.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,12 +36,8 @@ public class CategoryPostadapter extends RecyclerView.Adapter<CategoryPostadapte
     public void onBindViewHolder(CategoryPostadapter.ViewHolder viewHolder, int i) {
 
         viewHolder.tv_cat_name.setText(categoryModelPostsList.get(i).getCategoryName());
-//        Picasso.with(context)
-//                .load(categoryModelPostsList.get(i).getCategoryUrl())
-//                .placeholder(R.drawable.comment)
-//               // .resize(100,100)
-//                .into(viewHolder.img_cat);
-
+        viewHolder.tv_cat_name.setTextColor(Color.parseColor(categoryModelPostsList.get(i).getColorcodeText()));
+        viewHolder.cardView.setCardBackgroundColor(Color.parseColor(categoryModelPostsList.get(i).getColorCodebg()));
         Glide.with(context)
                 .load(categoryModelPostsList.get(i).getCategoryUrl())
                 .into(viewHolder.img_cat);
@@ -51,13 +49,13 @@ public class CategoryPostadapter extends RecyclerView.Adapter<CategoryPostadapte
     public int getItemCount() {
         return categoryModelPostsList.size();
     }
-
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView tv_cat_name;
         private ImageView img_cat;
+       private CardView cardView;
         public ViewHolder(View view) {
             super(view);
-
+            cardView=view.findViewById(R.id.card_view);
             tv_cat_name = view.findViewById(R.id.tv_cat_name);
             img_cat =  view.findViewById(R.id.img_cat);
         }

@@ -6,7 +6,8 @@
     android:layout_width="100dp"
     android:layout_height="100dp"
     android:layout_margin="5dp"
-    app:cardElevation="@dimen/px_8.0_dp"
+    app:cardElevation="@dimen/px_6.0_dp"
+    android:id="@+id/card_view"
     app:cardBackgroundColor="@color/blue_500"
     app:cardCornerRadius="8dp">
 
@@ -20,20 +21,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="4363"
+                android:text="4363bmhjkhjkjhljkljkljklkj;"
+                android:maxLines="2"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/px_2.0_dp"
                 android:paddingLeft="@dimen/px_8.0_dp"
                 android:paddingRight="@dimen/px_8.0_dp"
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
 
         <ImageView
-            android:layout_marginTop="@dimen/px_16.0_dp"
+            android:layout_marginTop="@dimen/px_10.0_dp"
             android:id="@+id/img_cat"
-            android:layout_width="@dimen/px_40.0_dp"
+            android:layout_width="@dimen/px_35.0_dp"
             android:src="@mipmap/header_icon_2"
             android:layout_gravity="right"
-            android:layout_marginRight="@dimen/px_40.0_dp"
-            android:layout_height="@dimen/px_40.0_dp"
+            android:layout_marginRight="@dimen/px_20.0_dp"
+            android:layout_height="@dimen/px_33.0_dp"
+            android:layout_marginBottom="@dimen/px_10.0_dp"
             />
 
         </LinearLayout>

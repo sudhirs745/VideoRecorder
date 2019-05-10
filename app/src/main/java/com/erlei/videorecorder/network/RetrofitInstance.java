@@ -11,7 +11,7 @@ public class RetrofitInstance {
 
    // private static final String BASE_URL = "http://192.168.1.2:4700/talentcruz/api/";
   //  public static final String BASE_URL = "http://tejweb.com:4700/talentcruz-api/";
-   public static final String BASE_URL="http://192.168.1.20:3000/talentcruz-api/";
+   public static final String BASE_URL="http://192.168.1.26:3000/talentcruz-api/";
 
    // http://localhost:3000/talentcruz-api/public/
 
