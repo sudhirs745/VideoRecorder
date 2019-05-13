@@ -4,13 +4,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.erlei.videorecorder.categoryHashtag.Adapter.CategoryPostadapter;
 import com.erlei.videorecorder.categoryHashtag.Model.CategoryModelPost;
+import com.erlei.videorecorder.categoryHashtag.buttondilog.HashtagBottomSheetFragment;
+import com.erlei.videorecorder.categoryHashtag.interfacCat.CategoryClickInterface;
 
 import java.util.ArrayList;
 
-public class PostCategory extends AppCompatActivity {
+public class PostCategory extends AppCompatActivity  implements CategoryClickInterface {
 
 
     RecyclerView recyclerView ;
@@ -78,7 +81,7 @@ public class PostCategory extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),3);
         recyclerView.setLayoutManager(layoutManager);
         ArrayList<CategoryModelPost> androidVersions = prepareData();
-        CategoryPostadapter adapter = new CategoryPostadapter(getApplicationContext(),androidVersions);
+        CategoryPostadapter adapter = new CategoryPostadapter(getApplicationContext(),androidVersions, this );
         recyclerView.setAdapter(adapter);
 
 
@@ -96,4 +99,15 @@ public class PostCategory extends AppCompatActivity {
         return categoryModelPostArrayList;
     }
 
+    @Override
+    public void CategoryitemClick(String id) {
+
+        Toast.makeText(this,id,Toast.LENGTH_LONG).show();
+
+
+                HashtagBottomSheetFragment  hashtagBottomSheetFragment = new HashtagBottomSheetFragment();
+               hashtagBottomSheetFragment.show(this.getSupportFragmentManager(), "Bottom Sheet Dialog Fragment");
+
+
+    }
 }

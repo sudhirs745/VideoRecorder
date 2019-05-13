@@ -13,17 +13,19 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.erlei.videorecorder.R;
 import com.erlei.videorecorder.categoryHashtag.Model.CategoryModelPost;
-import com.squareup.picasso.Picasso;
+import com.erlei.videorecorder.categoryHashtag.interfacCat.CategoryClickInterface;
 
 import java.util.ArrayList;
 
 public class CategoryPostadapter extends RecyclerView.Adapter<CategoryPostadapter.ViewHolder> {
     private ArrayList<CategoryModelPost> categoryModelPostsList;
     private Context context;
+    CategoryClickInterface categoryClickInterface;
 
-    public CategoryPostadapter(Context context,ArrayList<CategoryModelPost> categoryModelPostsList) {
+    public CategoryPostadapter(Context context,ArrayList<CategoryModelPost> categoryModelPostsList, CategoryClickInterface categoryClickInterface) {
         this.categoryModelPostsList = categoryModelPostsList;
         this.context = context;
+        this.categoryClickInterface=categoryClickInterface;
     }
 
     @Override
@@ -33,16 +35,25 @@ public class CategoryPostadapter extends RecyclerView.Adapter<CategoryPostadapte
     }
 
     @Override
-    public void onBindViewHolder(CategoryPostadapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(CategoryPostadapter.ViewHolder viewHolder, final int i) {
 
         viewHolder.tv_cat_name.setText(categoryModelPostsList.get(i).getCategoryName());
         viewHolder.tv_cat_name.setTextColor(Color.parseColor(categoryModelPostsList.get(i).getColorcodeText()));
         viewHolder.cardView.setCardBackgroundColor(Color.parseColor(categoryModelPostsList.get(i).getColorCodebg()));
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                categoryClickInterface.CategoryitemClick(categoryModelPostsList.get(i).getId());
+            }
+        });
+
         Glide.with(context)
                 .load(categoryModelPostsList.get(i).getCategoryUrl())
                 .into(viewHolder.img_cat);
 
         //Picasso.with(context).load(categoryModelPostsList.get(i).getCategoryUrl()).resize(240, 120).into(viewHolder.img_cat);
+
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.erlei.videorecorder.FilterAdapter;
 import com.erlei.videorecorder.FilterInterface;
 import com.erlei.videorecorder.FilterModel;
 import com.erlei.videorecorder.R;
+import com.erlei.videorecorder.categoryHashtag.Adapter.HashTagAdapter;
 import com.erlei.videorecorder.categoryHashtag.Model.HashTagModel;
 
 import java.util.ArrayList;
@@ -48,14 +50,18 @@ public class HashtagBottomSheetFragment extends BottomSheetDialogFragment implem
         View contentView = View.inflate(getContext(), R.layout.hash_tag_bottom_sheet, null);
         dialog.setContentView(contentView);
         RecyclerView recyclerView = contentView.findViewById(R.id.recycleview);
-        ArrayList<HashTagModel> hashTagModels = new ArrayList<>();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        ArrayList<HashTagModel> hashTagModelArrayList = new ArrayList<>();
+
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),3);
         recyclerView.setLayoutManager(layoutManager);
+
         for (int i = 0; i < 8; i++) {
-            HashTagModel  hashTagModel = new HashTagModel("F "+(i+1),"dsf" );
-            hashTagModels.add(hashTagModel);
+            HashTagModel  hashTagModel = new HashTagModel("#SONG "+(i+1),"dsf" );
+            hashTagModelArrayList.add(hashTagModel);
         }
-        //recyclerView.setAdapter(new FilterAdapter(filterModels, getActivity(),this ));
+
+        recyclerView.setAdapter(new HashTagAdapter(hashTagModelArrayList, getActivity(),this ));
 
         //Set the coordinator layout behavior
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) contentView.getParent()).getLayoutParams();
@@ -65,10 +71,7 @@ public class HashtagBottomSheetFragment extends BottomSheetDialogFragment implem
         if (behavior != null && behavior instanceof BottomSheetBehavior) {
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
         }
-
-
     }
-
 
     @Override
     public void onItemClick(String item , String type) {

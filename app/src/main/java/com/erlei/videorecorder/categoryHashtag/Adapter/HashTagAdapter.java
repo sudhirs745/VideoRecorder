@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.erlei.videorecorder.FilterInterface;
 import com.erlei.videorecorder.FilterModel;
 import com.erlei.videorecorder.R;
+import com.erlei.videorecorder.categoryHashtag.Model.HashTagModel;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
@@ -22,66 +23,43 @@ public class HashTagAdapter extends RecyclerView.Adapter<HashTagAdapter.ViewHold
 
     FilterInterface filterInterface ;
     //vars
-    private ArrayList<FilterModel> filterModelArrayList = new ArrayList<>();
+    private ArrayList<HashTagModel> hashTagModelArrayList = new ArrayList<>();
     private Context mContext;
 
-    public HashTagAdapter(ArrayList<FilterModel> filterModelArrayList, Context mContext , FilterInterface filterInterface ){
-        this.filterModelArrayList=filterModelArrayList;
+    public HashTagAdapter(ArrayList<HashTagModel> hashTagModelArrayList, Context mContext , FilterInterface filterInterface ){
+        this.hashTagModelArrayList=hashTagModelArrayList;
         this.mContext = mContext;
         this.filterInterface= filterInterface;
     }
 
 
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.horizontal_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hash_tag_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Log.d("Gett", "onBindViewHolder: called.");
-        final FilterModel filterModel=filterModelArrayList.get(position);
+        final HashTagModel hashTagModel=hashTagModelArrayList.get(position);
 
+        holder.name.setText(hashTagModel.getName());
 
-        holder.name.setText(filterModel.getFilterName());
-        holder.image.setImageResource(R.mipmap.header_icon_1);
-//        holder.image.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View v) {
-////                filterInterface.onItemClick(filterModel.getFilterKey());
-////            }
-////        });
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                filterInterface.onItemClick(filterModel.getFilterKey(),filterModel.getFilterType());
-            }
-        });
-
-//        holder.image.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//            }
-//        });
     }
 
     @Override
     public int getItemCount() {
-        return filterModelArrayList.size();
+        return hashTagModelArrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        CircularImageView image;
         TextView name;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.image_view);
             name = itemView.findViewById(R.id.name);
 
         }
